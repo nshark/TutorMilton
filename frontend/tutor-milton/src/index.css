@@ -1,13 +1,33 @@
 body {
+  background:url("resources/miltonpic.jpg");
+  height: 100vh;
+  width: 100vw;
+  background-size: cover;
+  background-attachment: fixed;
   margin: 0;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  display: grid;
+  place-items: center;
+  place-content: center;  
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.colorOverlay{
+  background: linear-gradient(to top right, blue, red);
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  opacity: .4;
+  position: absolute;
 }
