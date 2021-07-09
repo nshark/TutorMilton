@@ -1,3 +1,10 @@
+:root{
+  --main-gradient-color-left: #56CCF2;
+  --main-gradient-color-right: #2F80ED;
+  --main-orange: orange;
+  --main-blue: #358af8;
+}
+
 .App {
   text-align: center;
 }
@@ -13,8 +20,8 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
+.App-bg {
+  background: linear-gradient(to bottom right, var(--main-gradient-color-left), var(--main-gradient-color-right));
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -24,8 +31,32 @@
   color: white;
 }
 
+.App-header{
+  position: fixed;
+  /* height: 80px; */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100vw;
+  z-index: 1000;
+  /* background-color: white; */
+  top: 0;
+}
+
+.top-bar-title-tutor{
+  color: var(--main-orange);
+}
+
+.top-bar-title-milton{
+  color: white;
+}
+
 .App-link {
   color: #61dafb;
+}
+
+.main-title{
+  font-size: 100px;
 }
 
 @keyframes App-logo-spin {
