@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-bg">
-        <Header />
+        <Header loggedIn="true"/>
         <h1 className="main-title">Welcome.</h1>
         {/* {<img src={logo} className="App-logo" alt="logo" />
         <p>
