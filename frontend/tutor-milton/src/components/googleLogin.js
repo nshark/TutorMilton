@@ -1,11 +1,7 @@
 import React, { Component } from "react"
-import firebase from "firebase"
+import firebase from "../config/firebase-config"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
-firebase.initializeApp({
-  apiKey: "AIzaSyAPHfLRVwiyFCPaJdcOabfNKF5J23L-2Hc",
-  authDomain: "milton-tutor.firebaseapp.com	"
-})
 
 class googleLogin extends Component {
   state = { isSignedIn: false }
