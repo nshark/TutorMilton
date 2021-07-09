@@ -1,5 +1,10 @@
+:root{
+    --primary: hsla(348,97%,63%,0.65);
+    --secondary: hsla(230,96%,62%,0.65);
+}
 body {
-  background:url("resources/miltonpic.jpg");
+  background: linear-gradient(to top right, var(--primary), var(--secondary)),
+        url("resources/miltonpic.jpg");
   height: 100vh;
   width: 100vw;
   background-size: cover;
@@ -21,13 +26,4 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.colorOverlay{
-  background: linear-gradient(to top right, blue, red);
-  background-size: cover;
-  width: 100vw;
-  height: 100vh;
-  opacity: .4;
-  position: absolute;
 }
