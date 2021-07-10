@@ -6,7 +6,7 @@ import Login from './components/googleLogin'
 
 const App = () => {
   return (
-    <Login/>
+    <Login />
   )
 }
 
