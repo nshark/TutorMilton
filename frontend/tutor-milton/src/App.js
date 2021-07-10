@@ -5,8 +5,8 @@ import Header from './components/Header';
 function App() {
   return (
     <div className="App">
+      <Header loggedIn={false} />
       <div className="App-bg">
-        <Header loggedIn="true"/>
         <h1 className="main-title">Welcome.</h1>
         {/* {<img src={logo} className="App-logo" alt="logo" />
         <p>

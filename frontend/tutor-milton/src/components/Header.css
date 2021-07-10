@@ -1,0 +1,38 @@
+.App-header{
+    position: fixed;
+    /* height: 80px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100vw;
+    z-index: 1000;
+    /* background-color: white; */
+    top: 0;
+  }
+  
+  .top-bar-title-tutor{
+    color: var(--main-orange);
+  }
+  
+  .top-bar-title-milton{
+    color: white;
+  }
+
+  .nav-element{
+      margin: 0px 10px;
+  }
+
+  .nav-button{
+    border: none;
+    padding: 10px 20px;
+    border-radius: 100vh;
+    cursor: pointer;
+    font-weight: bold;
+  }
+
+  .top-bar-nav{
+      height: fit-content;
+      padding: 10px;
+    display: flex;
+    flex-direction: row;
+  }

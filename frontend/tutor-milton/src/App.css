@@ -31,26 +31,6 @@
   color: white;
 }
 
-.App-header{
-  position: fixed;
-  /* height: 80px; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100vw;
-  z-index: 1000;
-  /* background-color: white; */
-  top: 0;
-}
-
-.top-bar-title-tutor{
-  color: var(--main-orange);
-}
-
-.top-bar-title-milton{
-  color: white;
-}
-
 .App-link {
   color: #61dafb;
 }
