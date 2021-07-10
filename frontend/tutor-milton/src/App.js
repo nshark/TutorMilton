@@ -5,7 +5,7 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import Login from './components/googleLogin'
 
 const App = () => {
-  return (
+  return ( 
     <Login />
   )
 }
