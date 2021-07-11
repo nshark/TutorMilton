@@ -17,7 +17,7 @@ const Header = (props) => {
                     <button className="nav-element nav-button">Sign in</button>
                 )
                 }
-                <button className="nav-button">Find Open Tutors</button>
+                <button className="nav-button">Find Tutors in my Dorm</button>
             </div>
         </header>
     )
