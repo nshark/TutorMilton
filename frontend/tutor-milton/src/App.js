@@ -1,13 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
-import LandingPage from './components/LandingPage';
+import React, { useState } from "react";
+import { Component } from "react";
+import firebase from 'firebase';
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
+import Login from './components/googleLogin';
+import LandingPage from './components/LandingPage'
+import './App.css'
 
-function App() {
+const App = () => {
   return (
     <div className="App">
       <LandingPage />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
+
