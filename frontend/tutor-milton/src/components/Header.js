@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import './Header.css';
 
-const Header = (props) => {
+const Header = ({ loggedIn, username }) => {
     return (
         <header className="App-header">
             <h1 className="top-bar-title">
@@ -9,8 +9,8 @@ const Header = (props) => {
                 <span className="top-bar-title-milton">Milton</span>
             </h1>
             <div className="top-bar-nav">
-                {props.loggedIn ? ([
-                    <p className="nav-element">{`Hello, ${props.username}.`}</p>,
+                {loggedIn ? ([
+                    <p className="nav-element">{`Hello, ${username}.`}</p>,
                     <button className="nav-element nav-button">Sign out</button>
                 ]
                 ) : (
