@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import TutorHeader from './TutorHeader';
 import Frees from './Frees'
 import Subjects from './Subjects'
 import Tutoring from './Tutoring'
@@ -10,7 +9,7 @@ export default class TutorProf extends Component {
         return (
          
             <div className="App-bg">
-                   <TutorHeader />
+                   
 
                    <div class="row">
 

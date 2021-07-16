@@ -8,6 +8,7 @@ import LandingPage from './components/LandingPage';
 import Error from './components/Error';
 import Header from './components/Header';
 import TuteeProfile from './components/TuteeProfile';
+import TutorProfile from './components/TutorProf';
 import GoogleLogin from './components/googleLogin';
 import './App.css'
 
@@ -18,8 +19,9 @@ const App = () => {
           <Header />
             <Switch>
              <Route path="/" component={LandingPage} exact/>
-             <Route path="/profile" component={TuteeProfile} exact/>
-             <Route path="/login" component={GoogleLogin}/>
+             <Route path="/tutorprofile" component={TutorProfile} exact/>
+             <Route path="/tuteeprofile" component={TuteeProfile} exact/>
+             <Route path="/signin" component={GoogleLogin}/>
              <Route path="*" component={Error}/>
            </Switch>
         </div> 
