@@ -2,28 +2,29 @@ import {useState} from 'react'
 import './Header.css'
 
 function AddSub({onAddSub}) {
-    const [subject, setSubject] = useState('')
+    const [subjectText, setSubjectText] = useState('')
     
 
     const onSubmit = (e) => {
         e.preventDefault()
 
-        if(!subject){
+        if(!subjectText){
             alert('Please add a subject')
             return
         }
 
-        onAddSub({subject})
+        onAddSub({subjectText})
 
-        setSubject('')
+        setSubjectText('')
     }
+    
     return(
         <div className="prof-container">
         <form className='prof-comp' onSubmit={onSubmit}>
             <div className='form-control'>
             <span className="top-bar-title-tutor">Add Subject <br/></span>
-                <input type='text' placeholder='Add Subject' value={subject} onChange={(e)=>
-                setSubject(e.target.value)} />
+                <input type='text' placeholder='Add Subject' value={subjectText} onChange={(e)=>
+                setSubjectText(e.target.value)} />
                 <input type='submit' className = 'nav-element nav-button' value='Add Subject'/>
             </div>
             

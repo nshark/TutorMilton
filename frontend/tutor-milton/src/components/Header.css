@@ -6,6 +6,7 @@
     width: 100vw;
     z-index: 1000;
     top: 0;
+    
   }
   
   .top-bar-title{
@@ -117,8 +118,6 @@
   }
 
   .dropdown .dropbtn {
-    font-weight: bold;
-    text-decoration: none;
     font-size: 16px;
     border: none;
     outline: none;
@@ -167,3 +166,5 @@
   .dropdown:hover .dropdown-content {
     display: block;
   }
+
+  

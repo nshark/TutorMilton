@@ -1,18 +1,17 @@
 import PropTypes from 'prop-types';
 import './profcomps.css';
+import FreeList from './FreeList'
 
-const Frees = ({ free }) => {
+const Frees = ({ free, onAddFree, showFree }) => {
     return (
         <div className="prof-container">
         <header className="prof-comp">
             <h1 className="top-bar-title">
                 <span className="top-bar-title-tutor">My Free Periods</span>
-                <button className="nav-element nav-button">Add Free</button>
+                <button className="nav-element nav-button" text ={showFree ? 'close' : 'Add Subject'} onClick = {onAddFree}>Add Free</button>
                 
             </h1>
-            <div className="inner-container">
-                <h1 className="top-text">{free}</h1>
-            </div>
+            < FreeList frees = {free} />
         </header>
         </div>
     )
