@@ -1,10 +1,12 @@
 import PropTypes from 'prop-types';
 import AddSub from './AddSub'
 import './profcomps.css';
+import SubjectList from './SubjectList'
 import { useState } from 'react'
 
 const Subjects = ({ subject, onAddSub, showSub }) => {
     
+ 
     
     return (
         <div className="prof-container">
@@ -14,9 +16,7 @@ const Subjects = ({ subject, onAddSub, showSub }) => {
                 <button className="nav-element nav-button" text ={showSub ? 'close' : 'Add Subject'} onClick = {onAddSub}>Add Subject</button>
             </h1>
             
-            <div className="inner-container">
-            <h1 className="top-text">{subject}</h1>
-            </div>
+            < SubjectList subjects = {subject} />
 
             <h1 className="top-bar-title">
                 <span className="top-bar-title-tutor">Pending Subjects</span>
