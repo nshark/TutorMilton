@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Frees from './Frees'
 import Subjects from './Subjects'
-import Tutoring from './Tutoring'
+import Sessions from './Sessions'
 import './profcomps.css'
 
-export default class TutorRequest extends Component {
+export default class TuteeProfile extends Component {
     render() {
         return (
          
@@ -14,12 +14,12 @@ export default class TutorRequest extends Component {
                    <div class="row">
 
                     <div class="column">
-                        <Tutoring />
+                    <p>Will Become Tutor Requests Page!</p>
                     </div>
              
                     <div class="column">
-                        <Subjects />
-                        <Frees />
+                    <p>Will Become Tutor Requests Page!</p>
+                        
                     </div>
             
                 </div>    

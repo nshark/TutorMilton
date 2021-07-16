@@ -23,6 +23,9 @@ const Header = ({ loggedIn, username }) => {
                         <NavLink exact to="/tutorprofile" className="DropDownNavigation2" activeClassName="activeRoute">Tutor Profile</NavLink>
                         </div>
                     </li>
+                    <li>
+                        <NavLink exact to="/tutorrequests" className="Navigation" activeClassName="activeRoute">Tutor Requests</NavLink>
+                    </li>
                 </div>
             <div className="top-bar-nav">
                 {loggedIn ? ([

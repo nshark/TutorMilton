@@ -23,7 +23,7 @@ const App = () => {
              <Route path="/tutorprofile" component={TutorProfile} exact/>
              <Route path="/tuteeprofile" component={TuteeProfile} exact/>
              <Route path="/signin" component={GoogleLogin}/>
-             <Route path="/tutorrequest" component={TutorRequest}/>
+             <Route path="/tutorrequests" component={TutorRequest}/>
              <Route path="*" component={Error}/>
            </Switch>
         </div> 
