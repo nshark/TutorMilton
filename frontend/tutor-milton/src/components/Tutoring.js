@@ -16,10 +16,16 @@ const Tutoring = ({ tutee }) => {
                 <h2 className="top-text">Mary Sue, L2H</h2>
                 <h2 className="bottom-text">Monday, 5th Period</h2>  
             </div>
+            <div className="inner-container"> 
+                <h2 className="top-text">Other Name, R5</h2>
+                <h2 className="bottom-text">Friday, 1st Period</h2>  
+            </div>
         </header>
         </div>
     )
 }
+
+// 
 
 Tutoring.defaultProps = {
     tutee: "John Doe, SP2",

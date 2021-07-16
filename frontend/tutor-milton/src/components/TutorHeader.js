@@ -17,7 +17,7 @@ const TutorHeader = ({ username }) => {
 }
 
 TutorHeader.defaultProps = {
-    username: "Gunner Peterson"
+    username: "Filler Name"
 }
 
 TutorHeader.propTypes = {
