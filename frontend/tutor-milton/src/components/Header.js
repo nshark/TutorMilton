@@ -9,12 +9,18 @@ const Header = ({ loggedIn, username }) => {
                 <span className="top-bar-title-tutor">Tutor</span>
                 <span className="top-bar-title-milton">Milton</span>
             </h1>
-            <div id="Navigation_Menu">
+            <div id="Navigation_Menu" class="navbar">
                     <li>
                         <NavLink exact to="/" className="Navigation" activeClassName="activeRoute">Home</NavLink>
                     </li>
-                    <li>
-                        <NavLink exact to="/profile" className="Navigation" activeClassName="activeRoute">Profile</NavLink>
+                    <li class="dropdown">
+                    <button class="dropbtn">Dropdown
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                        <div class="dropdown-content">
+                        <NavLink exact to="/tutorprofile" className="DropDownNavigation" activeClassName="activeRoute">Tutee Profile</NavLink>
+                        <NavLink exact to="/tuteeprofile" className="DropDownNavigation" activeClassName="activeRoute">Tutor Profile</NavLink>
+                        </div>
                     </li>
                 </div>
             <div className="top-bar-nav">
