@@ -10,6 +10,7 @@ import Header from './components/Header';
 import TuteeProfile from './components/TuteeProfile';
 import TutorProfile from './components/TutorProf';
 import GoogleLogin from './components/googleLogin';
+import TutorRequest from './components/TutorRequest';
 import './App.css'
 
 const App = () => {
@@ -22,6 +23,7 @@ const App = () => {
              <Route path="/tutorprofile" component={TutorProfile} exact/>
              <Route path="/tuteeprofile" component={TuteeProfile} exact/>
              <Route path="/signin" component={GoogleLogin}/>
+             <Route path="/tutorrequest" component={TutorRequest}/>
              <Route path="*" component={Error}/>
            </Switch>
         </div> 
