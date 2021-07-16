@@ -18,11 +18,7 @@ exports.createUser = functions.auth.user().onCreate(async (user) => {
         freePeriods: [],
         isTutor: false,
         isTutee: false,
-        tutorAvailable: false,
-        subjectsCanTutor: [],
-        subjectsNeededTutor: [],
         dorm: "",
-        requestPending: false,
         cellPhone: "",
     };
 
@@ -30,3 +26,27 @@ exports.createUser = functions.auth.user().onCreate(async (user) => {
 
     await userRef.doc(String(user.uid)).set(newUser);
 });
+
+export const addTutor = functions.https.onRequest(
+    async (req: any, res: any) => {
+        const newTutor = {
+            available: true,
+            subjectsToTutor: [],
+        };
+
+        const userRef = db().collection("tutors");
+
+        await userRef.doc(String(req.body.uid)).set(newTutor);
+    });
+
+export const addTutee = functions.https.onRequest(
+    async (req: any, res: any) => {
+        const newTutee = {
+            requestPending: false,
+            subjectsNeeded: [],
+        };
+
+        const userRef = db().collection("tutees");
+
+        await userRef.doc(String(req.body.uid)).set(newTutee);
+    });
