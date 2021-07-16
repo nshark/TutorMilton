@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Frees from './Frees'
 import Subjects from './Subjects'
-import Tutoring from './Tutoring'
+import Sessions from './Sessions'
 import './profcomps.css'
 
 export default class TuteeProfile extends Component {
@@ -14,12 +14,12 @@ export default class TuteeProfile extends Component {
                    <div class="row">
 
                     <div class="column">
-                        <Tutoring />
+                        <Sessions />
                     </div>
              
                     <div class="column">
-                        <Subjects />
                         <Frees />
+                        
                     </div>
             
                 </div>    

@@ -18,8 +18,9 @@ const Header = ({ loggedIn, username }) => {
                         <i class="fa fa-caret-down"></i>
                     </button>
                         <div class="dropdown-content">
-                        <NavLink exact to="/tutorprofile" className="DropDownNavigation" activeClassName="activeRoute">Tutee Profile</NavLink>
-                        <NavLink exact to="/tuteeprofile" className="DropDownNavigation" activeClassName="activeRoute">Tutor Profile</NavLink>
+                        <NavLink exact to="/tuteeprofile" className="DropDownNavigation" activeClassName="activeRoute">Tutee Profile</NavLink>
+                        <div className="nav-spacer"> </div>
+                        <NavLink exact to="/tutorprofile" className="DropDownNavigation2" activeClassName="activeRoute">Tutor Profile</NavLink>
                         </div>
                     </li>
                 </div>

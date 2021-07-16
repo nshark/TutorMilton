@@ -51,7 +51,7 @@
   }
   .activeRoute {
     background-color: orange;
-    border-bottom: 0.4rem solid teal;
+    /* border-bottom: 0.4rem solid teal; */
   }
 
   .nav-element{
@@ -69,6 +69,7 @@
     font-weight: 600;
     background-color: #272727;
     text-decoration: none;
+    
   }
 
   .nav-button:hover{
@@ -97,6 +98,7 @@
     overflow: hidden;
     background-color: #333;
     font-family: Arial;
+    border-radius: 100vh;
   }
 
   .navbar a {
@@ -111,6 +113,7 @@
   .dropdown {
     float: left;
     overflow: hidden;
+    
   }
 
   .dropdown .dropbtn {
@@ -122,32 +125,40 @@
     background-color: inherit;
     font-family: inherit; /* Important for vertical align on mobile phones */
     margin: 0; /* Important for vertical align on mobile phones */
+    border-radius: 100vh;
+    cursor: pointer;
   }
 
   .navbar a:hover, .dropdown:hover .dropbtn {
-    background-color: red;
+    background-color: var(--main-orange);
   }
 
   .dropdown-content {
     display: none;
     position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    /* background-color: #f9f9f9; */
+    min-width: 100px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
     z-index: 1;
+    padding-top: 12px;
+  }
+  .nav-spacer {
+    padding:2px;
   }
 
   .dropdown-content a {
     float: none;
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-    text-align: left;
+    text-align: center;
+    border-radius: 50vh;
+    background-color: #333;
   }
 
   .dropdown-content a:hover {
-    background-color: #ddd;
+    background-color: var(--main-orange);
   }
   
   /* Show the dropdown menu on hover */

@@ -2,11 +2,32 @@
     padding-right: 20px;
     padding-left:20px;
     padding-bottom: 20px;
+    text-align: center;
+    
 }
 .prof-comp{
     background: white;
     border-radius: 20px;
     padding: 10px;
+    color: black;
+    text-align: center;
+}
+
+.prof-comp-pop{
+
+  border-radius: 20px;
+  padding: 10px;
+  color: black;
+  text-align: center;
+}
+.form-control{
+  background: white;
+  border-radius: 20px;
+  padding: 10px;
+  color: black;
+  text-align: center;
+  width: 90%;
+  padding: 10px;
 }
 .column {
     float: left;
@@ -36,4 +57,9 @@
 }
 .bottom-text{
   font-size: 20px;
+}
+
+.add-sub-form{
+  background-color: #fff;
+  border-radius: 20;
 }
