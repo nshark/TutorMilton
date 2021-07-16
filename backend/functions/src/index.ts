@@ -36,7 +36,19 @@ export const addTutor = functions.https.onRequest(
 
         const userRef = db().collection("tutors");
 
-        await userRef.doc(String(req.body.uid)).set(newTutor);
+        userRef.doc(String(req.body.uid)).set(newTutor).then(() => {
+            res.status(200).json({
+                result: "success",
+                tuteeInfo: newTutor,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
     });
 
 export const addTutee = functions.https.onRequest(
@@ -48,5 +60,17 @@ export const addTutee = functions.https.onRequest(
 
         const userRef = db().collection("tutees");
 
-        await userRef.doc(String(req.body.uid)).set(newTutee);
+        userRef.doc(String(req.body.uid)).set(newTutee).then(() => {
+            res.status(200).json({
+                result: "success",
+                tuteeInfo: newTutee,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
     });
