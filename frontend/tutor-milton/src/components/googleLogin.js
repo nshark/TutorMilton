@@ -3,6 +3,7 @@ import firebase from "../config/firebase-config"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import LoggedIn from './loggedIn'
 import LoginButton from './loginButton'
+import './Header.css'
 
 
 class googleLogin extends Component {

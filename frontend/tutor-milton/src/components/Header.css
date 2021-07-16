@@ -1,12 +1,10 @@
 .App-header{
     position: fixed;
-    /* height: 80px; */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     width: 100vw;
     z-index: 1000;
-    /* background-color: white; */
     top: 0;
   }
   
@@ -23,6 +21,39 @@
     color: white;
   }
 
+  #Navigation_Menu {
+    height: fit-content;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    height: 90%;
+    list-style-type: none;
+    margin: 10px;
+  }
+  .Navigation:link {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 100vh;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all ease-in-out .2s;
+    font-family: 'Poppins';
+    font-weight: 600;
+    text-decoration: none;
+  }
+  .Navigation:visited {
+    color: #fff;
+  }
+  .Navigation:hover {
+    background-color: var(--main-orange);
+    color: white;
+  }
+  .activeRoute {
+    background-color: orange;
+    border-bottom: 0.4rem solid teal;
+  }
+
   .nav-element{
       margin: 0px 10px;
   }
@@ -36,6 +67,8 @@
     transition: all ease-in-out .2s;
     font-family: 'Poppins';
     font-weight: 600;
+    background-color: #272727;
+    text-decoration: none;
   }
 
   .nav-button:hover{
@@ -43,9 +76,19 @@
       color: white;
   }
 
+  .nav-button:visited {
+    text-decoration: none;
+    color: black;
+  }
+
   .top-bar-nav{
       height: fit-content;
       padding: 10px;
     display: flex;
     flex-direction: row;
+  }
+
+  .container1 {
+    height: fit-content;
+    padding: 20%;
   }
