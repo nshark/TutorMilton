@@ -62,7 +62,6 @@ function TutorProf() {
          
             <div className="App-bg">
                    
-
                    <div class="row">
 
                     <div class="column">
@@ -72,10 +71,11 @@ function TutorProf() {
                     <div class="column">
                    
                         {showAddSub2 && <AddSub onAddSub={addSub}/>}
-                        {showAddFree2 && <AddSub onAddFree={addFree}/>}
+                        {showAddFree2 && <AddFree onAddFree={addFree}/>}
 
                         <Subjects subject={subjects} onAddSub = {()=>setShowAddSub(!showAddSub2)} showAddSub={showAddSub2}/>
                         <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showAddFree={showAddFree2}/>
+
                     </div>
             
                 </div>    
