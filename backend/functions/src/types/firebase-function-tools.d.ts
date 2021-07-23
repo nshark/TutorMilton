@@ -1,1 +1,1 @@
-declare module 'firebase-function-tools';
+// declare module "firebase-function-tools";

@@ -1,18 +1,18 @@
-import { database } from 'firebase-functions';
-import { auth } from 'firebase-admin';
+// import {database} from "firebase-functions";
+// import {auth} from "firebase-admin";
 
-export default database.ref('/users/{uid}').onUpdate((change, context) => {
-  const before = change.before.val();
-  const after = change.after.val();
-  const { isAdmin } = after;
+// export default database.ref("/users/{uid}").onUpdate((change, context) => {
+//   const before = change.before.val();
+//   const after = change.after.val();
+//   const {isAdmin} = after;
 
-  if (before.isAdmin === isAdmin) {
-    return null;
-  }
+//   if (before.isAdmin === isAdmin) {
+//     return null;
+//   }
 
-  const { uid } = context.params;
+//   const {uid} = context.params;
 
-  return auth().setCustomUserClaims(uid, {
-    isAdmin,
-  });
-});
+//   return auth().setCustomUserClaims(uid, {
+//     isAdmin,
+//   });
+// });

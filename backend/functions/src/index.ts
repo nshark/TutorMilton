@@ -87,3 +87,16 @@ export const addTutee = functions.https.onRequest(
                 dorm: req.query.dorm,
             });
         });
+
+    // export const getAvailableTutorsInDorms = functions.https.onRequest(
+    //     async (req: any, res: any) => {
+    //         const tutorsRef = db().collection("tutors");
+    //         const availableTutorsByDorm = await tutorsRef
+    //         .where("isAvailable", "==", true)
+    //         .where("isTutor", "==", true).get();
+    //         res.status(200).json({
+    //             result: "success",
+    //             tutors: availableTutorsByDorm,
+    //             dorm: req.query.dorm,
+    //         });
+    //     });
