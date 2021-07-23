@@ -22,9 +22,9 @@ exports.createUser = functions.auth.user().onCreate(async (user) => {
         cellPhone: "",
     };
 
-    const userRef = db().collection("users");
+    const usersRef = db().collection("users");
 
-    await userRef.doc(String(user.uid)).set(newUser);
+    await usersRef.doc(String(user.uid)).set(newUser);
 });
 
 export const addTutor = functions.https.onRequest(
@@ -34,9 +34,9 @@ export const addTutor = functions.https.onRequest(
             subjectsToTutor: [],
         };
 
-        const userRef = db().collection("tutors");
+        const usersRef = db().collection("tutors");
 
-        userRef.doc(String(req.body.uid)).set(newTutor).then(() => {
+        usersRef.doc(String(req.body.uid)).set(newTutor).then(() => {
             res.status(200).json({
                 result: "success",
                 tuteeInfo: newTutor,
@@ -58,9 +58,9 @@ export const addTutee = functions.https.onRequest(
             subjectsNeeded: [],
         };
 
-        const userRef = db().collection("tutees");
+        const usersRef = db().collection("tutees");
 
-        userRef.doc(String(req.body.uid)).set(newTutee).then(() => {
+        usersRef.doc(String(req.body.uid)).set(newTutee).then(() => {
             res.status(200).json({
                 result: "success",
                 tuteeInfo: newTutee,
@@ -74,3 +74,16 @@ export const addTutee = functions.https.onRequest(
         }
         );
     });
+
+    export const getTutorByDorm = functions.https.onRequest(
+        async (req: any, res: any) => {
+            const usersRef = db().collection("users");
+            const tutorsByDorm = await usersRef
+            .where("dorm", "==", req.query.dorm)
+            .where("isTutor", "==", true).get();
+            res.status(200).json({
+                result: "success",
+                tutors: tutorsByDorm,
+                dorm: req.query.dorm,
+            });
+        });
