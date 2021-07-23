@@ -2,10 +2,11 @@ import {useState} from 'react'
 import './Header.css'
 
 function AddFree({onAddFree}) {
+    
     const [freeText, setFreeText] = useState('')
     
 
-    const onSubmit = (e) => {
+    const onSubmitF = (e) => {
         e.preventDefault()
 
         if(!freeText){
@@ -20,7 +21,7 @@ function AddFree({onAddFree}) {
     
     return(
         <div className="prof-container">
-        <form className='prof-comp' onSubmit={onSubmit}>
+        <form className='prof-comp' onSubmit={onSubmitF}>
             <div className='form-control'>
             <span className="top-bar-title-tutor">Add Free <br/></span>
                 <input type='text' placeholder='Add Free' value={freeText} onChange={(e)=>
