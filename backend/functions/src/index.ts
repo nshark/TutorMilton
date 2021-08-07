@@ -20,6 +20,11 @@ exports.createUser = functions.auth.user().onCreate(async (user) => {
         isTutee: false,
         dorm: "",
         cellPhone: "",
+        available: false,
+        subjectsToTutor: [],
+        requestPending: false,
+        subjectsNeeded: [],
+
     };
 
     const usersRef = db().collection("users");
@@ -32,11 +37,12 @@ export const addTutor = functions.https.onRequest(
         const newTutor = {
             available: true,
             subjectsToTutor: [],
+            isTutor: true,
         };
 
-        const usersRef = db().collection("tutors");
+        const usersRef = db().collection("users");
 
-        usersRef.doc(String(req.body.uid)).set(newTutor).then(() => {
+        usersRef.doc(String(req.body.uid)).update(newTutor).then(() => {
             res.status(200).json({
                 result: "success",
                 tuteeInfo: newTutor,
@@ -56,11 +62,12 @@ export const addTutee = functions.https.onRequest(
         const newTutee = {
             requestPending: false,
             subjectsNeeded: [],
+            isTutee: true,
         };
 
-        const usersRef = db().collection("tutees");
+        const usersRef = db().collection("users");
 
-        usersRef.doc(String(req.body.uid)).set(newTutee).then(() => {
+        usersRef.doc(String(req.body.uid)).update(newTutee).then(() => {
             res.status(200).json({
                 result: "success",
                 tuteeInfo: newTutee,
@@ -75,7 +82,7 @@ export const addTutee = functions.https.onRequest(
         );
     });
 
-    export const getTutorByDorm = functions.https.onRequest(
+    export const getTutorsInUserDorm = functions.https.onRequest(
         async (req: any, res: any) => {
             const usersRef = db().collection("users");
             const tutorsByDorm = await usersRef
@@ -88,15 +95,74 @@ export const addTutee = functions.https.onRequest(
             });
         });
 
-    // export const getAvailableTutorsInDorms = functions.https.onRequest(
-    //     async (req: any, res: any) => {
-    //         const tutorsRef = db().collection("tutors");
-    //         const availableTutorsByDorm = await tutorsRef
-    //         .where("isAvailable", "==", true)
-    //         .where("isTutor", "==", true).get();
-    //         res.status(200).json({
-    //             result: "success",
-    //             tutors: availableTutorsByDorm,
-    //             dorm: req.query.dorm,
-    //         });
-    //     });
+    export const getAvailableTutorsInDorms = functions.https.onRequest(
+        async (req: any, res: any) => {
+            const tutorsRef = db().collection("tutors");
+            const allAvailableTutors = await tutorsRef
+            .where("isAvailable", "==", true)
+            .where("isTutor", "==", true).get();
+
+            let forbesArray: any[] = [];
+            let norrisArray: any[] = [];
+            let wolcottArray: any[] = [];
+            let goodwinArray: any[] = [];
+            let robbinsArray: any[] = [];
+            let milletArray: any[] = [];
+            let hallowellArray: any[] = [];
+            let hathawayArray: any[] = [];
+            let dayArray: any[] = [];
+
+            for (let i=0; i<allAvailableTutors.docs.length; i++){
+                //result[<string>allAvailableTutors.docs[i].data()["dorm"]].push(allAvailableTutors.docs[i].data());
+                let user = allAvailableTutors.docs[i].data();
+                //result[user.dorm.toString].push(user);
+                const userLowCaseDorm = (user.dorm as string).toLowerCase();
+                if (userLowCaseDorm == "forbes"){
+                    forbesArray.push(user);
+                }
+                else if (userLowCaseDorm == "norris"){
+                    norrisArray.push(user);
+                }
+                else if (userLowCaseDorm == "wolcott"){
+                    wolcottArray.push(user);
+                }
+                else if (userLowCaseDorm == "goodwin"){
+                    goodwinArray.push(user);
+                }
+                else if (userLowCaseDorm == "robbins"){
+                    robbinsArray.push(user);
+                }
+                else if (userLowCaseDorm == "millet"){
+                    milletArray.push(user);
+                }
+                else if (userLowCaseDorm == "hallowell"){
+                    hallowellArray.push(user);
+                }
+                else if (userLowCaseDorm == "hathaway"){
+                    hathawayArray.push(user);
+                }
+                else if (userLowCaseDorm == "day"){
+                    dayArray.push(user);
+                }
+            
+            }
+
+            let result = {
+                forbes: forbesArray,
+                norris: norrisArray,
+                wolcott: wolcottArray,
+                goodwin: goodwinArray,
+                robbins: robbinsArray,
+                millet: milletArray,
+                hallowell: hallowellArray,
+                hathaway: hathawayArray,
+                day: dayArray,
+            }
+
+            res.status(200).json({
+                result: "success",
+                tutors: result,
+            });
+
+        });
+
