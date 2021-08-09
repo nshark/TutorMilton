@@ -63,3 +63,36 @@
   background-color: #fff;
   border-radius: 20;
 }
+
+.conf-button{
+  background-color: #358af8;
+  margin: 5px;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.conf-button:hover{
+  cursor: pointer;
+  padding: 12px;
+  background-color:#005fdb ;
+}
+
+.can-button{
+  background-color: #C7C7C7;
+  margin: 5px;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 20px;
+}
+
+.can-button:hover{
+  cursor: pointer;
+  padding: 12px;
+  background-color: #B0B0B0;
+}
+
