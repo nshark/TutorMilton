@@ -5,13 +5,13 @@ const createUserAuth = async (email: string, isAdmin: boolean) => {
   const { uid } = await auth().createUser({ email });
 
   await auth().setCustomUserClaims(uid, {
-    isAdmin
+    isAdmin,
   });
 
   return uid;
 };
 
-export default https.onCall(async data => {
+export default https.onCall(async (data) => {
   const { email, isAdmin } = data;
 
   if (!email) {
