@@ -24,6 +24,7 @@ exports.createUser = functions.auth.user().onCreate(async (user) => {
         subjectsToTutor: [],
         requestPending: false,
         subjectsNeeded: [],
+        subjectsPending: [],
 
     };
 
@@ -42,10 +43,86 @@ export const addTutor = functions.https.onRequest(
 
         const usersRef = db().collection("users");
 
-        usersRef.doc(String(req.body.uid)).update(newTutor).then(() => {
+        usersRef.doc(String(req.query.uid)).update(newTutor).then(() => {
             res.status(200).json({
                 result: "success",
                 tuteeInfo: newTutor,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
+    });
+
+export const addDorm = functions.https.onRequest(
+    async (req: any, res: any) => {
+        const newUserPrefs = {
+            dorm: req.query.dorm,
+        };
+
+        const usersRef = db().collection("users");
+
+        usersRef.doc(String(req.query.uid)).update(newUserPrefs).then(() => {
+            res.status(200).json({
+                result: "success",
+                tuteeInfo: newUserPrefs,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
+    });
+
+export const setAvailability = functions.https.onRequest(
+    async (req: any, res: any) => {
+        const newUserPrefs = {
+            available: (req.query.availability==="true"),
+        };
+
+        const usersRef = db().collection("users");
+
+        usersRef.doc(String(req.query.uid)).update(newUserPrefs).then(() => {
+            res.status(200).json({
+                result: "success",
+                availability: newUserPrefs,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
+    });
+
+export const addFreePeriod = functions.https.onRequest(
+    async (req: any, res: any) => {
+        // const newUserPrefs = {
+        //     availability: (req.query.availability==="true"),
+        // };
+
+        const usersRef = db().collection("users");
+
+        usersRef.doc(String(req.query.uid)).get().then((doc) => {
+            const currentFrees = doc.data()?.freePeriods;
+            if (!currentFrees.includes(req.query.period)) {
+                currentFrees.push(req.query.period);
+            }
+            usersRef.doc(String(req.query.uid)).update({
+                freePeriods: currentFrees,
+            });
+            res.status(200).json({
+                result: "success",
+                frees: currentFrees,
             });
         }
         ).catch((error: any) => {
@@ -67,7 +144,7 @@ export const addTutee = functions.https.onRequest(
 
         const usersRef = db().collection("users");
 
-        usersRef.doc(String(req.body.uid)).update(newTutee).then(() => {
+        usersRef.doc(String(req.query.uid)).update(newTutee).then(() => {
             res.status(200).json({
                 result: "success",
                 tuteeInfo: newTutee,
@@ -97,57 +174,49 @@ export const addTutee = functions.https.onRequest(
 
     export const getAvailableTutorsInDorms = functions.https.onRequest(
         async (req: any, res: any) => {
-            const tutorsRef = db().collection("tutors");
+            const tutorsRef = db().collection("users");
             const allAvailableTutors = await tutorsRef
-            .where("isAvailable", "==", true)
+            .where("available", "==", true)
             .where("isTutor", "==", true).get();
 
-            let forbesArray: any[] = [];
-            let norrisArray: any[] = [];
-            let wolcottArray: any[] = [];
-            let goodwinArray: any[] = [];
-            let robbinsArray: any[] = [];
-            let milletArray: any[] = [];
-            let hallowellArray: any[] = [];
-            let hathawayArray: any[] = [];
-            let dayArray: any[] = [];
+            const forbesArray: any[] = [];
+            const norrisArray: any[] = [];
+            const wolcottArray: any[] = [];
+            const goodwinArray: any[] = [];
+            const robbinsArray: any[] = [];
+            const milletArray: any[] = [];
+            const hallowellArray: any[] = [];
+            const hathawayArray: any[] = [];
+            const dayArray: any[] = [];
 
-            for (let i=0; i<allAvailableTutors.docs.length; i++){
-                //result[<string>allAvailableTutors.docs[i].data()["dorm"]].push(allAvailableTutors.docs[i].data());
-                let user = allAvailableTutors.docs[i].data();
-                //result[user.dorm.toString].push(user);
+            for (let i=0; i<allAvailableTutors.docs.length; i++) {
+                // result[<string>allAvailableTutors.docs[i].data()["dorm"]]
+                // .push(allAvailableTutors.docs[i].data());
+                const user = allAvailableTutors.docs[i].data();
+                // result[user.dorm.toString].push(user);
                 const userLowCaseDorm = (user.dorm as string).toLowerCase();
-                if (userLowCaseDorm == "forbes"){
+                if (userLowCaseDorm == "forbes") {
                     forbesArray.push(user);
-                }
-                else if (userLowCaseDorm == "norris"){
+                } else if (userLowCaseDorm == "norris") {
                     norrisArray.push(user);
-                }
-                else if (userLowCaseDorm == "wolcott"){
+                } else if (userLowCaseDorm == "wolcott") {
                     wolcottArray.push(user);
-                }
-                else if (userLowCaseDorm == "goodwin"){
+                } else if (userLowCaseDorm == "goodwin") {
                     goodwinArray.push(user);
-                }
-                else if (userLowCaseDorm == "robbins"){
+                } else if (userLowCaseDorm == "robbins") {
                     robbinsArray.push(user);
-                }
-                else if (userLowCaseDorm == "millet"){
+                } else if (userLowCaseDorm == "millet") {
                     milletArray.push(user);
-                }
-                else if (userLowCaseDorm == "hallowell"){
+                } else if (userLowCaseDorm == "hallowell") {
                     hallowellArray.push(user);
-                }
-                else if (userLowCaseDorm == "hathaway"){
+                } else if (userLowCaseDorm == "hathaway") {
                     hathawayArray.push(user);
-                }
-                else if (userLowCaseDorm == "day"){
+                } else if (userLowCaseDorm == "day") {
                     dayArray.push(user);
                 }
-            
             }
 
-            let result = {
+            const result = {
                 forbes: forbesArray,
                 norris: norrisArray,
                 wolcott: wolcottArray,
@@ -157,12 +226,11 @@ export const addTutee = functions.https.onRequest(
                 hallowell: hallowellArray,
                 hathaway: hathawayArray,
                 day: dayArray,
-            }
+                unsorted: allAvailableTutors.docs,
+            };
 
             res.status(200).json({
                 result: "success",
                 tutors: result,
             });
-
         });
-
