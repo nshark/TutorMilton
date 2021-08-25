@@ -1,0 +1,70 @@
+{
+  "subjects": [
+    {
+      "id": 1,
+      "subject": "Math"
+    },
+    {
+      "id": 2,
+      "subject": "English"
+    },
+    {
+      "id": 3,
+      "subject": "Biology"
+    },
+    {
+      "subjectText": "History",
+      "id": 4
+    },
+    {
+      "subjectText": "dsfsdf",
+      "id": 5
+    },
+    {
+      "subjectText": "sdfsdf",
+      "id": 6
+    },
+    {
+      "subjectText": "sadasd",
+      "id": 7
+    }
+  ],
+  "frees": [
+    {
+      "id": 1,
+      "free": "Wednesday 1st"
+    },
+    {
+      "id": 2,
+      "free": "Friday 3rd"
+    },
+    {
+      "id": 3,
+      "free": "Thursday 2nd"
+    },
+    {
+      "freeText": "asdsa",
+      "id": 4
+    }
+  ],
+  "tutees": [
+    {
+      "id": 1,
+      "class": "SP2",
+      "name": "John Doe",
+      "time": "Wednesday, 2nd Period"
+    },
+    {
+      "id": 2,
+      "class": "L2H",
+      "name": "Mary Sue",
+      "time": "Monday, 2nd Period"
+    },
+    {
+      "id": 3,
+      "class": "R5",
+      "name": "Other Name",
+      "time": "Friday, 1st Period"
+    }
+  ]
+}
