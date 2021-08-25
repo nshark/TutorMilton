@@ -7,7 +7,7 @@ const FreeList = ({ frees }) => {
         <>
             {frees.map((free) => (
                 <div className="inner-container">
-                    <h1 className="top-text">{free.free} <FaTimes style={{ color: 'red', cursor: 'pointer'}}/> </h1>
+                    <h1 className="top-text">{free.freeText} <FaTimes style={{ color: 'red', cursor: 'pointer'}}/> </h1>
                 </div>
             ))}
         </>

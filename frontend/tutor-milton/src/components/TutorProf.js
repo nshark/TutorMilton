@@ -4,7 +4,8 @@ import Subjects from './Subjects'
 import Tutoring from './Tutoring'
 import AddSub from './AddSub'
 import AddFree from './AddFree'
-import SubjectList from './SubjectList'
+import AvailabilitySwitch from './AvailabilitySwitch'
+import DormChoice from './DormChoice'
 import { useState } from 'react'
 
 import './profcomps.css'
@@ -25,11 +26,12 @@ function TutorProf() {
     
 
 
+    //This use effect code will fetch the Subjects, Frees, and Tutees when the page loads
 
     useEffect(() => {
         
         const getSubjects = async () => {
-            const res = await fetch('http://localhost:5000/subjects')
+            const res = await fetch('http://localhost:5000/subjects') //Currently fetches from a local database that must be changed
             const data = await res.json()
             setSubjects(data)
         }
@@ -56,7 +58,7 @@ function TutorProf() {
     //Fetch Subjects and Frees
 
     
-
+    //Code to add a subject
     const addSub = async (subject) => {
         const res = await fetch('http://localhost:5000/subjects', {
         method: 'POST',
@@ -72,6 +74,7 @@ function TutorProf() {
 
     }
 
+    //Code to add a free
     const addFree = async (free) => {
         const res = await fetch('http://localhost:5000/frees', {
         method: 'POST',
@@ -94,6 +97,8 @@ function TutorProf() {
 
                     <div class="column">
                         <Tutoring tutee = {tutees}/>
+                        <DormChoice />
+                        <AvailabilitySwitch />
                     </div>
              
                     <div class="column">

@@ -2,15 +2,15 @@
   "subjects": [
     {
       "id": 1,
-      "subject": "Math"
+      "subjectText": "Math"
     },
     {
       "id": 2,
-      "subject": "English"
+      "subjectText": "English"
     },
     {
       "id": 3,
-      "subject": "Biology"
+      "subjectText": "Biology"
     },
     {
       "subjectText": "History",
@@ -27,24 +27,32 @@
     {
       "subjectText": "sadasd",
       "id": 7
+    },
+    {
+      "subjectText": "ASad",
+      "id": 8
     }
   ],
   "frees": [
     {
       "id": 1,
-      "free": "Wednesday 1st"
+      "freeText": "Wednesday 1st"
     },
     {
       "id": 2,
-      "free": "Friday 3rd"
+      "freeText": "Friday 3rd"
     },
     {
       "id": 3,
-      "free": "Thursday 2nd"
+      "freeText": "Thursday 2nd"
     },
     {
       "freeText": "asdsa",
       "id": 4
+    },
+    {
+      "freeText": "sasd",
+      "id": 5
     }
   ],
   "tutees": [

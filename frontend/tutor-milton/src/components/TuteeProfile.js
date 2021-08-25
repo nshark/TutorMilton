@@ -6,7 +6,7 @@ import AddFree from './AddFree'
 import { useState } from 'react'
 import './profcomps.css'
 
-function TuteeProfile() {
+function TuteeProfile() { //This needs to be "serverified"
 
     const [frees, setFrees] = useState([
         {
