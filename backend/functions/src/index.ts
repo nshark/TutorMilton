@@ -134,6 +134,59 @@ export const addFreePeriod = functions.https.onRequest(
         );
     });
 
+export const deleteFreePeriod = functions.https.onRequest(
+    async (req: any, res: any) => {
+        // const newUserPrefs = {
+        //     availability: (req.query.availability==="true"),
+        // };
+
+        const usersRef = db().collection("users");
+
+        usersRef.doc(String(req.query.uid)).get().then((doc) => {
+            const currentFrees = doc.data()?.freePeriods;
+            for (let i=0; i < currentFrees.length(); i++) {
+                if (currentFrees[i] === (req.query.periodToDelete)) {
+                currentFrees.splice(i);
+                }
+            }
+            usersRef.doc(String(req.query.uid)).update({
+                freePeriods: currentFrees,
+            });
+            res.status(200).json({
+                result: "success",
+                frees: currentFrees,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
+    });
+
+export const makePairing = functions.https.onRequest(
+    async (req: any, res: any) => {
+        const usersRef = db().collection("matches");
+
+        usersRef.add({
+            tutee: req.query.tuteeUid,
+            tutor: req.query.tutorUid,
+            subject: req.query.subject,
+        }).then(() => {
+            res.status(200).json({
+                result: "success",
+            });
+        }).catch((error: any) => {
+            res.status(200).json({
+                result: "error: could not set document",
+                error: error,
+            });
+        }
+        );
+    });
+
 export const addTutee = functions.https.onRequest(
     async (req: any, res: any) => {
         const newTutee = {
