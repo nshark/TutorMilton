@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Component } from "react";
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
 import firebase from 'firebase';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
 import Login from './components/googleLogin';
@@ -11,6 +11,8 @@ import TuteeProfile from './components/TuteeProfile';
 import TutorProfile from './components/TutorProf';
 import GoogleLogin from './components/googleLogin';
 import TutorRequest from './components/TutorRequest';
+import PairingPage from './components/PairingPage'
+
 import './App.css'
 
 const App = () => {
@@ -24,6 +26,7 @@ const App = () => {
              <Route path="/tuteeprofile" component={TuteeProfile} exact/>
              <Route path="/signin" component={GoogleLogin}/>
              <Route path="/tutorrequests" component={TutorRequest}/>
+             <Route path="/pairing/:id"> <PairingPage /> </Route>
              <Route path="*" component={Error}/>
            </Switch>
         </div> 

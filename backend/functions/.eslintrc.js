@@ -16,10 +16,12 @@ module.exports = {
   parserOptions: {
     project: ["tsconfig.json", "tsconfig.dev.json"],
     sourceType: "module",
+    "ecmaVersion": 6
   },
   ignorePatterns: [
     "/lib/**/*", // Ignore built files.
     ".eslintrc.js",
+    "setupProject.js",
   ],
   plugins: [
     "@typescript-eslint",
@@ -29,5 +31,9 @@ module.exports = {
     "quotes": ["error", "double"],
     "indent": "off",
     "linebreak-style": "off",
+    'object-curly-spacing': ['error', 'always'],
+  'quotes': ['error'],
+  'eol-last': ["error", "never"],
+  "comma-dangle": [2, "always-multiline"], 
   },
 };

@@ -3,29 +3,28 @@ import './profcomps.css';
 
 const Tutoring = ({ tutee }) => {
     return (
+        
         <div className="prof-container">
-        <header className="prof-comp">
-            <h1 className="top-bar-title">
-                <span className="top-bar-title-tutor">Currently Tutoring</span>
-            </h1>
+            
+            <header className="prof-comp">
+             <h1 className="top-bar-title">
+                 <span className="top-bar-title-tutor">Currently Tutoring</span>
+             </h1>
+             </header>
+        
+
+        {tutee.map((tut) => ( //This will need to become formatted in the ListComponent format. Mirror what was done for FreeList and SubjectList
             <div className="inner-container"> 
-                <h2 className="top-text">{tutee}</h2>
-                <h2 className="bottom-text">Wednesday, 2nd Period</h2>  
-            </div>
-            <div className="inner-container"> 
-                <h2 className="top-text">Mary Sue, L2H</h2>
-                <h2 className="bottom-text">Monday, 5th Period</h2>  
-            </div>
-            <div className="inner-container"> 
-                <h2 className="top-text">Other Name, R5</h2>
-                <h2 className="bottom-text">Friday, 1st Period</h2>  
-            </div>
-        </header>
+                <h2 className="top-text">{tut.name}, {tut.class}</h2>
+                <h2 className="bottom-text">{tut.time}</h2>  
+             </div>
+        ))}
+
         </div>
+        
     )
 }
 
-// 
 
 Tutoring.defaultProps = {
     tutee: "John Doe, SP2",

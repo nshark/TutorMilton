@@ -7,7 +7,7 @@ const SubjectList = ({ subjects }) => {
         <>
             {subjects.map((sub) => (
                 <div className="inner-container">
-                    <h1 className="top-text">{sub.subject} <FaTimes style={{ color: 'red', cursor: 'pointer'}}/> </h1>
+                    <h1 className="top-text">{sub.subjectText} <FaTimes style={{ color: 'red', cursor: 'pointer'}}/> </h1>
                 </div>
             ))}
         </>
