@@ -74,5 +74,25 @@
       "name": "Other Name",
       "time": "Friday, 1st Period"
     }
+  ],
+  "sessions":[
+    {
+      "id": 1,
+      "class": "SP2",
+      "name": "John Doe",
+      "time": "Wednesday, 2nd Period"
+    },
+    {
+      "id": 2,
+      "class": "L2H",
+      "name": "Mary Sue",
+      "time": "Monday, 2nd Period"
+    },
+    {
+      "id": 3,
+      "class": "R5",
+      "name": "Other Name",
+      "time": "Friday, 1st Period"
+    }
   ]
 }
