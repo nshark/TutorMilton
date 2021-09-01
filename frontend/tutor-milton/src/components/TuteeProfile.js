@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect  } from 'react';
+
 import Frees from './Frees'
 import Subjects from './Subjects'
 import Sessions from './Sessions'
@@ -8,30 +9,51 @@ import './profcomps.css'
 
 function TuteeProfile() { //This needs to be "serverified"
 
-    const [frees, setFrees] = useState([
-        {
-            id: 1,
-            free: "Wednesday 1st"
-        },
-        {
-            id: 2,
-            free: "Friday 3rd"
-        },
-        {
-            id: 3,
-            free: "Thursday 2nd"
-        },
-    ])
+    const [frees, setFrees] = useState([])
+    const [sessions, setSessions] = useState([])
     
 
     const [showAddFree2, setShowAddFree] = useState (false)
 
     const [free, setFree] = useState([])
+    const [session, setSession] = useState([])
+    
+    useEffect(() => {
+        
+
+        const getFrees = async () => {
+            const res = await fetch('http://localhost:5000/frees')
+            const data = await res.json()
+            setFrees(data)
+        }
+        const getSessions = async () => {
+            const res = await fetch('http://localhost:5000/sessions')
+            const data2 = await res.json()
+            setSessions(data2)
+        }
+
+
+        getFrees()
+        getSessions()
     
 
-    const addFree = (free) => {
-        console.log(free)
+    }, [])
+
+    const addFree = async (free) => {
+        const res = await fetch('http://localhost:5000/frees', {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(free)
+    })
+
+    const data  = await res.json()
+
+    setFrees([...frees, data])
     }
+
+
         return (
          
             <div className="App-bg">
@@ -40,7 +62,7 @@ function TuteeProfile() { //This needs to be "serverified"
                    <div class="row">
 
                     <div class="column">
-                        <Sessions />
+                        <Sessions session = { sessions }/>
                     </div>
              
                     <div class="column">
