@@ -32,6 +32,10 @@ function TuteeProfile() { //This needs to be "serverified"
         calendarApi.addEvent(event);
     }
 
+    async function handleEventAdd(data) {
+
+    }
+
     
     useEffect(() => {
         
@@ -78,6 +82,7 @@ function TuteeProfile() { //This needs to be "serverified"
                     ref={calendarRef}
                     plugins={[dayGridPlugin, interaction, timeGrid, rrule]}
                     initialView="dayGridMonth"
+                    eventAdd={event => handleEventAdd(event)}
                     timeZone="est"
                     header={{
 left: 'prev,next today',
