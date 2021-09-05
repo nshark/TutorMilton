@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './profcomps.css';
 import TutoringList from './TutoringList'
+import React from 'react';
 
 const Tutoring = ({ tutee }) => {
     return (

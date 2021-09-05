@@ -1,3 +1,8 @@
+.modal{
+  overflow: hidden;
+  background-color: #005fdb;
+}
+
 .prof-container{
     padding-right: 20px;
     padding-left:20px;
@@ -31,13 +36,16 @@
 }
 .column {
     float: left;
-    width: 50%;
+    width: 45%;
+    
+    padding:20px;
   }
   /* Clear floats after the columns */
 .row:after {
     content: "";
     display: table;
     clear: both;
+    overflow:hidden;
 }
   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other on smaller screens (600px wide or less) */
 @media screen and (max-width: 600px) {
@@ -65,11 +73,11 @@
 }
 
 .conf-button{
-  background-color: #358af8;
+  background-color:#005fdb;
   margin: 5px;
   border: none;
   color: #fff;
-  padding: 10px;
+  padding: 12px;
   border-radius: 10px;
   font-size: 20px;
 }
@@ -96,3 +104,38 @@
   background-color: #B0B0B0;
 }
 
+.txt-Box{
+  border: none;
+  border-radius: 10px;
+  font-size: medium;
+  background-color: #fff;
+  padding: 5px;
+  width: 500px;
+}
+
+.txt-Box::placeholder{
+  border: none;
+  border-radius: 10px;
+  font-size: medium;
+  color: grey;
+  text-align: center;
+}
+
+.txt-Box:focus{
+  outline:none;
+}
+
+.title-Box{
+ margin: auto;
+  width: 60%;
+}
+
+.se-Label{
+  font-weight: bold;
+  color:#ff9100 ;
+  
+}
+
+.datePicker:hover{
+  cursor: pointer;
+}

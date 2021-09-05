@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './profcomps.css';
 import SessionsList from './SessionsList';
+import React from 'react';
 
 const Sessions = ({ session }) => {
     return (

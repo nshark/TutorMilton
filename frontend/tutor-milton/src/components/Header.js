@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './Header.css';
 import { NavLink } from 'react-router-dom';
+import React from 'react';
 
 const Header = ({ loggedIn, username }) => {
     return (
@@ -13,16 +14,12 @@ const Header = ({ loggedIn, username }) => {
                     <li>
                         <NavLink exact to="/" className="Navigation" activeClassName="activeRoute">Home</NavLink>
                     </li>
-                    <li class="dropdown">
-                    <button class="dropbtn">Dropdown
-                        <i class="fa fa-caret-down"></i>
-                    </button>
-                        <div class="dropdown-content">
-                        <NavLink exact to="/tuteeprofile" className="DropDownNavigation" activeClassName="activeRoute">Tutee Profile</NavLink>
-                        <div className="nav-spacer"> </div>
-                        <NavLink exact to="/tutorprofile" className="DropDownNavigation2" activeClassName="activeRoute">Tutor Profile</NavLink>
-                        </div>
+                    
+                    <li> 
+                        <NavLink exact to="/tuteeprofile" className="Navigation" activeClassName="activeRoute">My Profile</NavLink>
                     </li>
+                        
+            
                     <li>
                         <NavLink exact to="/tutorrequests" className="Navigation" activeClassName="activeRoute">Tutor Requests</NavLink>
                     </li>

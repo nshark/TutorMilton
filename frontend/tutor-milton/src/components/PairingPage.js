@@ -5,7 +5,7 @@ import {
     Link,
     useParams
   } from "react-router-dom";
-
+import React from 'react';
 import './profcomps.css'
 
 function PairingPage() {

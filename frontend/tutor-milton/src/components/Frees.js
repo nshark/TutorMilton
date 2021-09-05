@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import './profcomps.css';
 import FreeList from './FreeList'
+import React from 'react';
 
 const Frees = ({ free, onAddFree, showFree }) => {
     return (
