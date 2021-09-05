@@ -11,9 +11,12 @@ import TuteeProfile from './components/TuteeProfile';
 import TutorProfile from './components/TutorProf';
 import GoogleLogin from './components/googleLogin';
 import TutorRequest from './components/TutorRequest';
-import PairingPage from './components/PairingPage'
+import PairingPage from './components/PairingPage';
+import Modal from 'react-modal';
 
 import './App.css'
+
+Modal.setAppElement('#root');
 
 const App = () => {
   return (
