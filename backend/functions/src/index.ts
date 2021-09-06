@@ -1,33 +1,61 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
-import * as bodyParser from 'body-parser';
-import * as Datetime from 'react-datetime';
+// import * as cors from 'cors';
+// import * as bodyParser from 'body-parser';
+// import * as Datetime from 'react-datetime';
 
-admin.initializeApp(functions.config().firebase);
+const app = express();
 
-const app=express()
-const main=express()
+// app.get('/', (req, res) => {
 
-main.use('/Myapi',app)
-main.use(bodyParser.json())
-main.use(bodyParser.urlencoded({extended:false}))
+// });
 
-const db=admin.firestore()
-export const webApi=functions.https.onRequest(main)
+app.post('/', async (req, res) => {
+    const user = req.body;
 
-interface User
-{
-    userEmail:String,
-    gradYear:Number,
-    createDate:Date,
-    displayName:String,
-    calendarEvents:[String, Datetime, Datetime, Number, String],
-    isTutor:Boolean,
-    
+    await admin.firestore().collection('users').add(user);
+
+    res.status(201).send();
+});
+
+exports.user = functions.https.onRequest(app);
 
 
-}
+exports.helloWorld = functions.https.onRequest((req, res) => {
+    res.send('hello');
+});
+
+// admin.initializeApp(functions.config().firebase);
+
+// const app=express()
+// const main=express()
+
+// main.use('/Myapi',app)
+// main.use(bodyParser.json())
+// main.use(bodyParser.urlencoded({extended:false}))
+
+// const db=admin.firestore()
+// export const webApi=functions.https.onRequest(main)
+
+// interface User
+// {
+//     userEmail:String,
+//     gradYear:Number,
+//     createDate:Date,
+//     displayName:String,
+//     calendarEvents:[String, Datetime, Datetime,
+//  Number, String, Boolean, Boolean],
+//     isTutor:Boolean,
+//     dorm:String,
+//     cellPhone:Number
+// }
+
+// app.post('/addUser', async(req,res)=>{
+//     const user:User={
+//          userEmail:
+//     }
+// })
 
 
 // const db = admin.firestore;
