@@ -4,14 +4,16 @@ import React, {useState} from "react";
 import Modal from "react-modal";
 
 import Datetime from 'react-datetime';
+import "./profcomps.css"
+import "./react-datetime.css";
 
-import './profcomps.css'
+
 
 export default function ({isOpen, onClose, onEventAdded}) {
     const [title, setTitle] = useState("");
     const [start, setStart] = useState(new Date());
     const [end, setEnd] = useState(new Date());
-    const [reoccurrence, setReoccurrence] = useState();
+    const [reoccurrence, setReoccurrence]  = useState();
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -31,14 +33,16 @@ export default function ({isOpen, onClose, onEventAdded}) {
         
         <div className="App-bg">
             <div className="Row">
-                
+
+            
+            <div className="background-Form">
             <form onSubmit={onSubmit}>
             
             <div className="title-Box">
                 <input placeholder="Title" className="txt-Box" value={title} onChange={e => setTitle(e.target.value)} />
             </div>
 
-            <div className="column">
+            <div className="s-date">
                     <label className="se-Label">Start Date</label>
           
                     <Datetime className="datePicker" value={start} onChange={date => setStart(date)} />
@@ -46,12 +50,14 @@ export default function ({isOpen, onClose, onEventAdded}) {
 
             
 
-                <div className="column">
+                <div className="e-date">
+                    <br/>
                     <label className="se-Label">End Date</label>
                 
                     <Datetime className="datePicker" value={end} onChange={date => setEnd(date)} />
                 </div>
-                <div>
+                <div className="reocurrence-Label">
+                    <br/><br/>
                     <label className="se-Label">Reoccurrence</label>
                 
                     {/* <Datetime value={start} onChange={date => setEnd(date)} /> */}
@@ -59,6 +65,7 @@ export default function ({isOpen, onClose, onEventAdded}) {
 
                 <button className="conf-button">Submit</button>
             </form>
+            </div>
             </div>
             </div>
         </Modal>

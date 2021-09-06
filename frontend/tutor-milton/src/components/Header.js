@@ -21,7 +21,7 @@ const Header = ({ loggedIn, username }) => {
                         
             
                     <li>
-                        <NavLink exact to="/tutorrequests" className="Navigation" activeClassName="activeRoute">Tutor Requests</NavLink>
+                        <NavLink exact to="/tutorrequests" className="Navigation" activeClassName="activeRoute">Requests</NavLink>
                     </li>
                 </div>
             <div className="top-bar-nav">
@@ -34,7 +34,7 @@ const Header = ({ loggedIn, username }) => {
                     <NavLink exact to="/signin" className="nav-element nav-button">Sign in</NavLink>
                 )
                 }
-                <button className="nav-button">Find Tutors in my Dorm</button>
+ 
             </div>
         </header>
     )
