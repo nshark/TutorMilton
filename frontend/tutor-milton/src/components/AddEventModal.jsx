@@ -11,16 +11,13 @@ import "./react-datetime.css";
 
 export default function ({isOpen, onClose, onEventAdded}) {
     const [title, setTitle] = useState("");
-    const [start, setStart] = useState(new Date());
-    const [end, setEnd] = useState(new Date());
+    const [start, setStart] = useState();
+    const [end, setEnd] = useState();
     const [reoccurrence, setReoccurrence]  = useState();
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log('start: ',start)
-        console.log('end: ',end)
-        console.log(title)
-
+        console.log("title: "+title+" start: "+start+" end: "+end)
         onEventAdded({
             title,
             start,
