@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import './Header.css';
+import React from 'react';
 
 const TutorHeader = ({ username }) => {
     return (

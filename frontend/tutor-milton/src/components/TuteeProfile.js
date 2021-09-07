@@ -2,8 +2,9 @@ import React, { Component, useEffect, useRef } from 'react';
 import FullCalendar, { EventApi } from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interaction from '@fullcalendar/interaction';
-import timeGrid from '@fullcalendar/timegrid';
+import timeGrid, { DayTimeColsView } from '@fullcalendar/timegrid';
 import rrule from '@fullcalendar/rrule';
+
 
 import Frees from './Frees'
 import Subjects from './Subjects'
@@ -35,6 +36,10 @@ function TuteeProfile() { //This needs to be "serverified"
     async function handleEventAdd(data) {
 
     }
+
+    const handleDateClick = dateClickInfo => {
+        
+      };
 
     
     useEffect(() => {
@@ -76,21 +81,23 @@ function TuteeProfile() { //This needs to be "serverified"
         return (
             <div className="App-bg">
             <section>
-            <button onClick={() => setModalOpen(true)}>Add Event</button>
-                <div style={{position: "relative", zIndex: 0}}>
+            <button onClick={() => setModalOpen(true)} className = "conf-button">Add Event</button>
+                <div style={{position: "relative", zIndex: 0, width: "1300px"}}>
                 <FullCalendar 
                     ref={calendarRef}
                     plugins={[dayGridPlugin, interaction, timeGrid, rrule]}
                     initialView="dayGridMonth"
                     eventAdd={event => handleEventAdd(event)}
                     timeZone="est"
-                    header={{
-left: 'prev,next today',
+                    
+                    headerToolbar={{
+left: 'dayGridMonth,timeGridWeek,timeGridDay',
 center: 'title',
-right: 'dayGridMonth,timeGridWeek,timeGridDay'
+right: 'prev,next today'
 }
 }
                     editable="true"
+                    selectable="true"
                     eventClick={
   function(arg){
     console.log(arg);
@@ -101,6 +108,8 @@ arg.event.remove()
     // alert(arg.event.start)
   }
 }
+
+                    
                 />
                 </div>
                 <AddEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={event => onEventAdded(event)}/>
@@ -246,6 +255,7 @@ arg.event.remove()
             // </div>
            
         );
+        
     }
 
     export default TuteeProfile

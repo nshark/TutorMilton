@@ -3,7 +3,7 @@ import AddSub from './AddSub'
 import './profcomps.css';
 import SubjectList from './SubjectList'
 import { useState } from 'react'
-
+import React from 'react';
 const Subjects = ({ subject, onAddSub, showSub }) => {
     
  

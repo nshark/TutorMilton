@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import './Header.css'
+import React from 'react';
 
 function AddFree({onAddFree}) {
     
