@@ -1,10 +1,11 @@
 import React, { Component, useState } from 'react';
+import TutorsModal from './TutorsModal'
 import Frees from './Frees'
 import Subjects from './Subjects'
 import Sessions from './Sessions'
 import './profcomps.css'
 
-const TutorRequest = () => {
+function TutorRequest() {
     
     
 
@@ -16,6 +17,8 @@ const TutorRequest = () => {
         const [email2, setEmail2] = useState('')
         const [class2, setClass2] = useState('')
 
+        const [modalOpen, setModalOpen] = useState(false);
+
 
 
         const onSubmit1 = (e) =>{
@@ -25,9 +28,20 @@ const TutorRequest = () => {
                 alert('invalid email')
                 return
             }
+            else if(!class1){
+                alert('please select a course')
+                return
+            }
+            else if(!free){
+                alert('please select a free')
+                return
+            }
             console.log(email1)
             console.log(class1)
             console.log(free)
+
+            //Add new page thing here
+            setModalOpen(true)
         }
 
         const onSubmit2 = (e) =>{
@@ -37,8 +51,19 @@ const TutorRequest = () => {
                 alert('invalid email')
                 return
             }
-            console.log(email2)
-            console.log(class2)
+
+            else if(!class2){
+                alert('please select a course')
+                return
+            }
+
+            if(window.confirm("Confirm Request?")){
+                console.log(email2)
+                console.log(class2)
+            }
+            else{
+                return
+            }
         }
 
 
@@ -194,11 +219,11 @@ const TutorRequest = () => {
                     </div>
 
                     <div class="dropdown">
-                        <select onclick="myFunction()" class="dropbtn" >
+                        <select onclick="myFunction()" class="dropbtn" onChange={(e)=> setFree(e.target.value)}>
                             <option selected disabled>Choose Your Frees</option>
-                            <option value="#">Intensive Classical Greek</option>
-                            <option value="#">Adv Greek: Plato</option>
-                            <option value="#">Latin 2/3 (Accelerated)</option>
+                            <option value="free1">Intensive Classical Greek</option>
+                            <option value="free2">Adv Greek: Plato</option>
+                            <option value="free3">Latin 2/3 (Accelerated)</option>
                         </select>
                         <input placeholder="Add Your Teacher's Email" className="txt-Box2"  value={email1} onChange={(e)=> setEmail1(e.target.value)}/>
                     </div>
@@ -365,6 +390,8 @@ const TutorRequest = () => {
                     </div>
                     
                 </div>
+
+                <TutorsModal isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
 
                     
             </div>

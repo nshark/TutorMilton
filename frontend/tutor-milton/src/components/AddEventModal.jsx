@@ -17,6 +17,16 @@ export default function ({isOpen, onClose, onEventAdded}) {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        if(!start){
+            alert("add a start date")
+            return
+        }
+
+        if(!end){
+            alert("add an end date")
+            return
+        }
+        
         console.log("title: "+title+" start: "+start+" end: "+end)
         onEventAdded({
             title,

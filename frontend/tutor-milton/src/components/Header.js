@@ -27,7 +27,7 @@ const Header = ({ loggedIn, username }) => {
             <div className="top-bar-nav">
                 {loggedIn ? ([
                     <p className="nav-element">{`Hello, ${username}.`}</p>,
-                    <NavLink exact to="/signout" className="nav-element nav-button">Sign out</NavLink>
+                    <NavLink exact to="/signin" className="nav-element nav-button">Sign out</NavLink>
                     
                 ]
                 ) : (

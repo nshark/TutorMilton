@@ -91,10 +91,28 @@
   font-size: 20px;
 }
 
+.conf-button-event{
+  background-color:#005fdb;
+  margin-bottom: 10px;
+  margin-top: 7%;
+  border: none;
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 20px;
+  
+}
+
 .conf-button:hover{
   cursor: pointer;
   padding: 12px;
-  background-color:#005fdb ;
+  background-color:#0048a7 ;
+}
+
+.conf-button-event:hover{
+  cursor: pointer;
+  padding: 12px;
+  background-color:#0048a7 ;
 }
 
 .can-button{
@@ -118,6 +136,7 @@
   border-radius: 10px;
   font-size: medium;
   background-color: #FFF;
+  text-align: center;
   padding: 5px;
   width: 500px;
 }
@@ -159,3 +178,23 @@
 .custom-pad{
   padding: 12px;
 }
+
+.tutor-background-Form{
+  background-color: #fff;
+  text-align: center;
+  padding: 50px;
+  border-radius: 10%;
+}
+
+.tutor-background-Form p{
+  color: #000;
+}
+
+input[type="checkbox"]{
+  width:20px;
+  height:20px;
+  border-radius:5px;
+  border:none;
+}
+
+

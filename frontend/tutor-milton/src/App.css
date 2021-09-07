@@ -47,6 +47,8 @@
 .welcome-subtitle{
   cursor: pointer;
   transition: all ease-in-out .2s;
+  text-decoration: none;
+  color: white;
 }
 
 .welcome-subtitle:hover{
