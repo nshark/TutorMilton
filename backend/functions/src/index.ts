@@ -39,6 +39,20 @@ app.post('/', async (req, res) => {
     res.status(201).send();
 });
 
+app.put("/:id", async (req, res) => {
+    const body = req.body;
+
+    await admin.firestore().collection('users').doc(req.params.id).update(body);
+
+    res.status(200).send();
+});
+
+app.delete("/:id", async (req, res) => {
+    await admin.firestore().collection("users").doc(req.params.id).delete();
+
+    res.status(200).send();
+});
+
 exports.user = functions.https.onRequest(app);
 
 
