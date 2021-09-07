@@ -7,6 +7,7 @@
     z-index: 1000;
     top: 0;
     
+    
   }
   
   .top-bar-title{
@@ -74,7 +75,7 @@
   }
 
   .nav-button:hover{
-      background-color: var(--main-orange);
+      background-color: ;
       color: white;
   }
 
@@ -112,7 +113,7 @@
   }
   
   .dropbtn {
-    background-color: #4CAF50;
+    background-color: orange;
     color: white;
     padding: 16px;
     font-size: 16px;
@@ -184,7 +185,7 @@
   
   /* Change the background color of the dropdown button when the dropdown content is shown */
   .dropdown:hover .dropbtn {
-    background-color: #3e8e41;
+    background-color: var(--main-orange);
   }
 
   .prof-img{
@@ -199,5 +200,4 @@
     justify-content: center;
     align-items: center;
     height: 100px;
-
   }
