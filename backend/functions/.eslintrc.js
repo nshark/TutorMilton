@@ -35,5 +35,6 @@ module.exports = {
   'quotes': ['error'],
   'eol-last': ["error", "never"],
   "comma-dangle": [2, "always-multiline"], 
+  "max-len": ['off'],
   },
 };

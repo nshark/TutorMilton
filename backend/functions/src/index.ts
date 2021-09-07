@@ -5,11 +5,31 @@ import * as express from 'express';
 // import * as bodyParser from 'body-parser';
 // import * as Datetime from 'react-datetime';
 
+admin.initializeApp();
+
 const app = express();
 
-// app.get('/', (req, res) => {
+app.get('/', async (req, res) => {
+    const snapshot = await admin.firestore().collection('users').get();
+    const users:any = [];
+    snapshot.forEach((doc) => {
+        const id = doc.id;
+        const data = doc.data;
 
-// });
+        users.push({ id, ...data });
+    });
+
+    res.status(200).send(JSON.stringify(users));
+});
+
+app.get('/:id', async (req, res) => {
+    const snapshot = await admin.firestore().collection('users').doc(req.params.id).get();
+
+    const userId = snapshot.id;
+    const userData = snapshot.data;
+
+    res.status(200).send(JSON.stringify({ id: userId, ...userData }));
+});
 
 app.post('/', async (req, res) => {
     const user = req.body;
