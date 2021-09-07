@@ -141,12 +141,27 @@
   
   /* Links inside the dropdown */
 
-  
-  
-  .dropdown-content a {
+  .dropbtn option {
     color: black;
     padding: 12px 16px;
     font-size: 16px;
+    text-decoration: none;
+    display: block;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 300px;
+    max-height: calc(100vh/3);
+    overflow:scroll; 
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+
+
+  
+  .dropbtn option:disabled  {
+    color: black;
+    padding: 12px 16px;
+    font-size: 20px;
     text-decoration: none;
     display: block;
     

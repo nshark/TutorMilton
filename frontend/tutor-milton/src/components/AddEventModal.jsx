@@ -17,6 +17,9 @@ export default function ({isOpen, onClose, onEventAdded}) {
 
     const onSubmit = (event) => {
         event.preventDefault();
+        console.log('start: ',start)
+        console.log('end: ',end)
+        console.log(title)
 
         onEventAdded({
             title,
@@ -63,7 +66,7 @@ export default function ({isOpen, onClose, onEventAdded}) {
                     {/* <Datetime value={start} onChange={date => setEnd(date)} /> */}
                 </div>
 
-                <button className="conf-button">Submit</button>
+                <input type="submit" className="conf-button"></input>
             </form>
             </div>
             </div>
