@@ -17,6 +17,7 @@ const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher }
         console.log(subject)
         console.log(teacher)
         if(window.confirm("Confirm Pairings?")){
+         
             onClose();
         }
         else{
@@ -37,12 +38,12 @@ const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher }
             
             <div className="tutor-background-Form">
 
-            <form onSubmit={onSubmit}>
+            {/* <form onSubmit={onSubmit}> */}
                 <p>Choose Your Tutors {subject}</p>
                 <TutoringList />
 
-                <input type="submit" className="conf-button" value="Let's Go!"></input>
-            </form>
+                {/* <input type="submit" className="conf-button" value="Let's Go!"></input> */}
+            {/* </form> */}
             </div>
             </div>
             </div>
