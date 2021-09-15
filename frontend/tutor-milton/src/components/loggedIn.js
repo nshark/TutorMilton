@@ -4,6 +4,27 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import './Header.css'
 
 class LoggedIn extends Component {
+
+    async signOut(e) {
+
+        e.preventDefault()
+
+        if(window.confirm("Are you sure you want to sign out?")){
+            await firebase.auth().signOut().then(function() {
+                console.log("Successfully signed out.")
+          
+              }).catch(function(error) {
+                console.log(error)
+                console.log("An error occurred")
+              });
+        }
+
+        else{
+            return
+        }
+    
+      }
+
     render() {
         return(
             <span>
@@ -15,7 +36,7 @@ class LoggedIn extends Component {
                 />
                 <br/>
                 <div className="signout-Div">
-                <button className="conf-button" onClick={() => firebase.auth().signOut}>Sign Out!</button>
+                <button className="conf-button" onClick={this.signOut}>Sign Out!</button>
                 </div>
             </span>
             )

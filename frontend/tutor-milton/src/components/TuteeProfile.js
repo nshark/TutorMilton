@@ -95,7 +95,7 @@ function TuteeProfile() { //This needs to be "serverified"
         return (
             <div className="App-bg">
             <section>
-            <button onClick={() => setModalOpen(true)} className = "conf-button">Add Event</button>
+            <button onClick={() => setModalOpen(true)} className = "conf-button-event">Add Event</button>
                 <div style={{position: "relative", zIndex: 0, width: "1300px"}}>
                 <FullCalendar 
                     ref={calendarRef}

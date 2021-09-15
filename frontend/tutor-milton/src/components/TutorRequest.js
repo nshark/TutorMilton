@@ -1,13 +1,75 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
+import TutorsModal from './TutorsModal'
 import Frees from './Frees'
 import Subjects from './Subjects'
 import Sessions from './Sessions'
 import './profcomps.css'
 
-export default class TuteeProfile extends Component {
+function TutorRequest() {
     
-    render() {
+    
+
+
+        const [email1, setEmail1] = useState('')
+        const [class1, setClass1] = useState('')
+        const [free, setFree] = useState('')
+
+        const [email2, setEmail2] = useState('')
+        const [class2, setClass2] = useState('')
+
+        const [modalOpen, setModalOpen] = useState(false);
+
+
+
+        const onSubmit1 = (e) =>{
+            e.preventDefault()
+
+            if(/\d/.test(email1) || email1.includes("@milton.edu")==false){
+                alert('invalid email')
+                return
+            }
+            else if(!class1){
+                alert('please select a course')
+                return
+            }
+            else if(!free){
+                alert('please select a free')
+                return
+            }
+            console.log(email1)
+            console.log(class1)
+            console.log(free)
+
+            //Add new page thing here
+            setModalOpen(true)
+        }
+
+        const onSubmit2 = (e) =>{
+            e.preventDefault()
+
+            if(/\d/.test(email2) || email2.includes("@milton.edu")==false){
+                alert('invalid email')
+                return
+            }
+
+            else if(!class2){
+                alert('please select a course')
+                return
+            }
+
+            if(window.confirm("Confirm Request?")){
+                console.log(email2)
+                console.log(class2)
+            }
+            else{
+                return
+            }
+        }
+
+
         return (
+
+            
          
             <div className="App-bg">
                    
@@ -17,9 +79,9 @@ export default class TuteeProfile extends Component {
                     <div class="column">
                     <div className="profComp">
                     <p>Click here to request tutoring</p>
-                    <form id="request-form">
+                    <form id="request-form" onSubmit={ onSubmit1 }>
                     <div class="dropdown">
-                        <select onclick="myFunction()" class="dropbtn">
+                        <select onclick="myFunction()" class="dropbtn" onChange={(e)=> setClass1(e.target.value)}>
                         
                             <option selected disabled className="dropbtn-Title">Select a course</option>
                             <option disabled>Classics</option>
@@ -157,18 +219,18 @@ export default class TuteeProfile extends Component {
                     </div>
 
                     <div class="dropdown">
-                        <select onclick="myFunction()" class="dropbtn" >
+                        <select onclick="myFunction()" class="dropbtn" onChange={(e)=> setFree(e.target.value)}>
                             <option selected disabled>Choose Your Frees</option>
-                            <option value="#">Intensive Classical Greek</option>
-                            <option value="#">Adv Greek: Plato</option>
-                            <option value="#">Latin 2/3 (Accelerated)</option>
+                            <option value="free1">Intensive Classical Greek</option>
+                            <option value="free2">Adv Greek: Plato</option>
+                            <option value="free3">Latin 2/3 (Accelerated)</option>
                         </select>
-                        <input placeholder="Add Your Teacher's Email" className="txt-Box2" />
+                        <input placeholder="Add Your Teacher's Email" className="txt-Box2"  value={email1} onChange={(e)=> setEmail1(e.target.value)}/>
                     </div>
 
                 
                     
-                    <div><input type="submit" className="conf-button"></input></div>
+                    <div><input type="submit" className="conf-button" ></input></div>
                     </form>
                     
                     </div>
@@ -177,10 +239,10 @@ export default class TuteeProfile extends Component {
              
                     <div class="column">
                     <div className="profComp">
-                    <p>Click here to add a subject to tutor</p>
-                    <form id="subject-form">
+                    <p>Add a subject to tutor</p>
+                    <form id="subject-form" onSubmit={ onSubmit2 }>
                     <div class="dropdown">
-                    <select onclick="myFunction()" class="dropbtn">
+                    <select onclick="myFunction()" class="dropbtn" onChange={(e)=> setClass2(e.target.value)}>
                         
                         <option selected disabled className="dropbtn-Title">Select a course</option>
                         <option disabled>Classics</option>
@@ -320,7 +382,7 @@ export default class TuteeProfile extends Component {
                     <div class="dropdown">
                     </div>
                     <p></p>
-                    <input placeholder="Enter Teacher's Email For Approval" className="txt-Box2" />
+                    <input placeholder="Enter Teacher's Email For Approval" className="txt-Box2" value={email2} onChange={(e)=> setEmail2(e.target.value)}/>
                     <div class="custom-pad"><input type="submit" className="conf-button"></input></div>
                     </form>
                     </div>
@@ -329,9 +391,11 @@ export default class TuteeProfile extends Component {
                     
                 </div>
 
+                <TutorsModal isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
+
                     
             </div>
            
         );
     }
-}
+export default TutorRequest;

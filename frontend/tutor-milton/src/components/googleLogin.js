@@ -3,6 +3,7 @@ import firebase from "../config/firebase-config"
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import LoggedIn from './loggedIn'
 import LoginButton from './loginButton'
+import Header from './Header'
 import '../App.css'
 
 
@@ -22,11 +23,15 @@ class googleLogin extends Component {
    
       <div className="App-bg">
         {this.state.isSignedIn ? (
+          
+          
 
           <LoggedIn />
+          
 
         ) : (
-
+          
+          
           <LoginButton />
 
         )}
