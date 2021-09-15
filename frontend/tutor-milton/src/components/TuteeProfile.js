@@ -15,6 +15,7 @@ import AddFree from './AddFree'
 import { useState } from 'react'
 import './profcomps.css'
 import AddEventModal from './AddEventModal';
+import moment from 'moment';
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -28,68 +29,84 @@ function TuteeProfile() { //This needs to be "serverified"
     const [session, setSession] = useState([])
 
     const [modalOpen, setModalOpen] = useState(false);
+    const [events, setEvents] = useState([]);
     const calendarRef = useRef(null);
 
-    const onEventAdded = event => {
+    const onEventAdded = (event) => {
         let calendarApi = calendarRef.current.getApi()
-        calendarApi.addEvent(event);
+        calendarApi.addEvent({
+            start: moment(event.start).toDate(),
+            end: moment(event.end).toDate(),
+            title: event.title,
+        });
     }
 
     async function handleEventAdd(data) {
-        console.log("here");
-        const user = firebase.auth.currentUser;
-        const token = user && (await user.getIdToken());
-        const res = await fetch("https://us-central1-milton-tutor.cloudfunctions.net/user", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: `Bearer ${token}`,
-            },
-          });
-        console.log(res.json());
-        return res.json();
-        // await axios.post("/api/calendar/create-event", data.event);
+        console.log("data!!!"+data)
+        await axios.put('https://us-central1-milton-tutor.cloudfunctions.net/user/FDhtGoOP4lebRlKHda6l', data.event);
+        // console.log("here");
+        // const user = firebase.auth.currentUser;
+        // const token = user && (await user.getIdToken());
+        // const res = await fetch("https://us-central1-milton-tutor.cloudfunctions.net/user", {
+        //     method: 'POST',
+        //     headers: {
+        //       'Content-Type': 'application/json',
+        //       Authorization: `Bearer ${token}`,
+        //       'origin': ["https://example.com"]
+        //     },
+        //   });
+        // console.log(res.json());
+        // return res.json();
     }
 
-    const handleDateClick = dateClickInfo => {
+    async function handleDatesSet(data) {
+        const response = await axios.get("/api/calendar/get-events?start="+moment(data.start).toISOString()+"&end="+moment(data.end).toISOString());
+        setEvents(response.data);
+    }
+
+    
+
+    // const handleDateClick = dateClickInfo => {
         
-      };
+    //   };
 
     
     useEffect(() => {
         
 
         const getFrees = async () => {
-            const res = await fetch('http://localhost:5000/frees')
-            const data = await res.json()
+            console.log("hey!")
+            const res = await axios.get('https://us-central1-milton-tutor.cloudfunctions.net/user/FDhtGoOP4lebRlKHda6l')
+            const data = await res.data
+            console.log("data: "+data)
             setFrees(data)
         }
-        const getSessions = async () => {
-            const res = await fetch('http://localhost:5000/sessions')
-            const data2 = await res.json()
-            setSessions(data2)
-        }
+        // const getSessions = async () => {
+        //     const res = await fetch('http://localhost:5000/sessions')
+        //     const data2 = await res.json()
+        //     setSessions(data2)
+        // }
 
 
         getFrees()
-        getSessions()
+        // getSessions()
     
 
     }, [])
 
-    const addFree = async (free) => {
-        const res = await fetch('http://localhost:5000/frees', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json'
-        },
-        body: JSON.stringify(free)
-    })
+    // const addFree = async (free) => {
+    //     const res = await fetch('http://localhost:5000/frees', {
+    //     method: 'POST',
+    //     headers: {
+    //         'Content-type': 'application/json'
+    //     },
+    //     body: JSON.stringify(free)
+    // })
 
-    const data  = await res.json()
+    // const data  = await res.json()
 
-    setFrees([...frees, data])
-    }
+    // setFrees([...frees, data])
+    // }
 
 
         return (
@@ -99,9 +116,11 @@ function TuteeProfile() { //This needs to be "serverified"
                 <div style={{position: "relative", zIndex: 0, width: "1300px"}}>
                 <FullCalendar 
                     ref={calendarRef}
+                    events={events}
                     plugins={[dayGridPlugin, interaction, timeGrid, rrule]}
                     initialView="dayGridMonth"
                     eventAdd={(event) => handleEventAdd(event)}
+                    datesSet={(date) => handleDatesSet(date)}
                     timeZone="est"
                     
                     headerToolbar={{

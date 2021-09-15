@@ -1,6 +1,9 @@
+/* eslint-disable */
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import * as express from 'express';
+const cors = require('cors')({origin: true});
+
 // import * as cors from 'cors';
 // import * as bodyParser from 'body-parser';
 // import * as Datetime from 'react-datetime';
@@ -10,25 +13,77 @@ admin.initializeApp();
 const app = express();
 app.use(decodeIDToken);
 
-app.get('/', async (req, res) => {
-    const snapshot = await admin.firestore().collection('users').get();
-    const users:any = [];
-    snapshot.forEach((doc) => {
-        const id = doc.id;
-        const data = doc.data;
+app.use(cors);
 
-        users.push({ id, ...data });
-    });
+// app.get('**', (req, res) => {
+//     cors(req, res, () => {
+//         // Your App Here
+  
+//         // Send response
+//         res.status(200).send();
+//       });
+//   });
 
-    res.status(200).send(JSON.stringify(users));
-});
+// app.get('/', async (req, res) => {
+//     const snapshot = await admin.firestore().collection('users').get();
+//     const users:any = [];
+//     snapshot.forEach((doc) => {
+//         const id = doc.id;
+//         const data = doc.data;
+
+//         users.push({ id, ...data });
+//     });
+
+//     res.status(200).send(JSON.stringify(users));
+// });
+
+// app.get('/:id', async (req, res) => {
+//     const snapshot = await admin.firestore().collection('users').doc(req.params.id).get();
+    
+//     const userId = snapshot.id;
+//     const userData = snapshot.data;
+//     res.status(200).send(JSON.stringify({ id: userId, ...userData }));
+// });
 
 app.get('/:id', async (req, res) => {
-    const snapshot = await admin.firestore().collection('users').doc(req.params.id).get();
+    // await admin.firestore().collection("users").where("id", "==", req.params.id)
+    // .get()
+    // .then(function(querySnapshot) {
+    //     querySnapshot.forEach(function(doc) {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         console.log(doc.id, " => ", doc.data());
+    //         var start = doc.get("start");
+    //         var end = doc.get("end");
+    //         var title = doc.get("title");
+    //         let dataa = {start, end, title};
+    //         res.status(200).send(JSON.stringify({ id: doc.id, ...dataa }));
+    //     });
+    // })
+    // .catch(function(error) {
+    //     console.log("Error getting documents: ", error);
+    // });
 
-    const userId = snapshot.id;
-    const userData = snapshot.data;
-    res.status(200).send(JSON.stringify({ id: userId, ...userData }));
+    await admin.firestore().collection("users").where("id", "==", req.params.id)
+    .get()
+    .then(function(querySnapshot) {
+        querySnapshot.forEach(function(doc) {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+            var start = doc.get("start");
+            var end = doc.get("end");
+            var title = doc.get("title");
+            let dataa = {start, end, title};
+            res.status(200).send(JSON.stringify({ id: doc.id, ...dataa }));
+        });
+    })
+    .catch(function(error) {
+        console.log("Error getting documents: ", error);
+    });
+
+    // const snapshot = await admin.firestore().collection('users').doc(req.params.id).get();
+    // const userId = snapshot.id;
+    
+    // const userData = snapshot.data;
 });
 
 app.post('/', async (req, res) => {
@@ -63,10 +118,18 @@ app.delete('/:id', async (req, res) => {
 
 exports.user = functions.https.onRequest(app);
 
+// exports.userUpdate = functions.https.onRequest(
+//         app.put('/:id', async (req, res) => {
+//         const body = req.body;
+//         await admin.firestore().collection('users').doc(req.params.id).update(body);
+//         res.status(200).send();
+//     }));
 
-exports.helloWorld = functions.https.onRequest((req, res) => {
-    res.send('hello');
-});
+
+// exports.helloWorld = functions.https.onRequest((req, res) => {
+//     res.send('hello');
+// });
+
 async function decodeIDToken(req: any, res: any, next: any) {
 if (req.headers?.authorization?.startsWith('Bearer ')) {
       const idToken = req.headers.authorization.split('Bearer ')[1];
@@ -112,54 +175,54 @@ if (req.headers?.authorization?.startsWith('Bearer ')) {
 // })
 
 
-// const db = admin.firestore;
+const db = admin.firestore;
 
-// exports.createUser = functions.auth.user().onCreate(async (user) => {
-//     const gradYear = user.email?.split('@')[0]
-//         .substr(user.email?.split('@')[0].length - 2);
-//     // if(!isNaN(gradYear)){
+exports.createUser = functions.auth.user().onCreate(async (user) => {
+    const gradYear = user.email?.split('@')[0]
+        .substr(user.email?.split('@')[0].length - 2);
+    // if(!isNaN(gradYear)){
 
-//     // }
-//     const newUser = {
-//         email: user.email,
-//         gradYear: gradYear,
-//         createDate: db.FieldValue.serverTimestamp(),
-//         displayName: user.displayName,
-//         freePeriods: [],
-//         isTutor: false,
-//         isTutee: false,
-//         dorm: '',
-//         cellPhone: '',
-//     };
+    // }
+    const newUser = {
+        email: user.email,
+        gradYear: gradYear,
+        createDate: db.FieldValue.serverTimestamp(),
+        displayName: user.displayName,
+        freePeriods: [],
+        isTutor: false,
+        isTutee: false,
+        dorm: '',
+        cellPhone: '',
+    };
 
-//     const userRef = db().collection('users');
+    const userRef = db().collection('users');
 
-//     await userRef.doc(String(user.uid)).set(newUser);
-// });
+    await userRef.doc(String(user.uid)).set(newUser);
+});
 
-// export const addTutor = functions.https.onRequest(
-//     async (req: any, res: any) => {
-//         const newTutor = {
-//             available: true,
-//             subjectsToTutor: [],
-//         };
+export const addTutor = functions.https.onRequest(
+    async (req: any, res: any) => {
+        const newTutor = {
+            available: true,
+            subjectsToTutor: [],
+        };
 
-//         const userRef = db().collection('tutors');
+        const userRef = db().collection('tutors');
 
-//         userRef.doc(String(req.body.uid)).set(newTutor).then(() => {
-//             res.status(200).json({
-//                 result: 'success',
-//                 tuteeInfo: newTutor,
-//             });
-//         }
-//         ).catch((error: any) => {
-//             res.status(200).json({
-//                 result: 'error: could not set document',
-//                 error: error,
-//             });
-//         }
-//         );
-//     });
+        userRef.doc(String(req.body.uid)).set(newTutor).then(() => {
+            res.status(200).json({
+                result: 'success',
+                tuteeInfo: newTutor,
+            });
+        }
+        ).catch((error: any) => {
+            res.status(200).json({
+                result: 'error: could not set document',
+                error: error,
+            });
+        }
+        );
+    });
 
 // export const addTutee = functions.https.onRequest(
 //     async (req: any, res: any) => {
