@@ -8,6 +8,7 @@ import * as express from 'express';
 admin.initializeApp();
 
 const app = express();
+app.use(decodeIDToken);
 
 app.get('/', async (req, res) => {
     const snapshot = await admin.firestore().collection('users').get();
@@ -27,7 +28,6 @@ app.get('/:id', async (req, res) => {
 
     const userId = snapshot.id;
     const userData = snapshot.data;
-
     res.status(200).send(JSON.stringify({ id: userId, ...userData }));
 });
 
@@ -39,7 +39,15 @@ app.post('/', async (req, res) => {
     res.status(201).send();
 });
 
-app.put("/:id", async (req, res) => {
+app.put('/create-event', async (req:any, res) => {
+    const user = req['currentUser'];
+
+    if (!user) {
+    res.status(403).send('You must be logged in!');
+    }
+});
+
+app.put('/:id', async (req, res) => {
     const body = req.body;
 
     await admin.firestore().collection('users').doc(req.params.id).update(body);
@@ -47,8 +55,8 @@ app.put("/:id", async (req, res) => {
     res.status(200).send();
 });
 
-app.delete("/:id", async (req, res) => {
-    await admin.firestore().collection("users").doc(req.params.id).delete();
+app.delete('/:id', async (req, res) => {
+    await admin.firestore().collection('users').doc(req.params.id).delete();
 
     res.status(200).send();
 });
@@ -59,6 +67,18 @@ exports.user = functions.https.onRequest(app);
 exports.helloWorld = functions.https.onRequest((req, res) => {
     res.send('hello');
 });
+async function decodeIDToken(req: any, res: any, next: any) {
+if (req.headers?.authorization?.startsWith('Bearer ')) {
+      const idToken = req.headers.authorization.split('Bearer ')[1];
+        try {
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        req['currentUser'] = decodedToken;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    next();
+  }
 
 // admin.initializeApp(functions.config().firebase);
 

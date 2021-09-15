@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import interaction from '@fullcalendar/interaction';
 import timeGrid, { DayTimeColsView } from '@fullcalendar/timegrid';
 import rrule from '@fullcalendar/rrule';
+import axios from 'axios';
+import firebase from "../config/firebase-config"
 
 
 import Frees from './Frees'
@@ -34,7 +36,19 @@ function TuteeProfile() { //This needs to be "serverified"
     }
 
     async function handleEventAdd(data) {
-
+        console.log("here");
+        const user = firebase.auth.currentUser;
+        const token = user && (await user.getIdToken());
+        const res = await fetch("https://us-central1-milton-tutor.cloudfunctions.net/user", {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${token}`,
+            },
+          });
+        console.log(res.json());
+        return res.json();
+        // await axios.post("/api/calendar/create-event", data.event);
     }
 
     const handleDateClick = dateClickInfo => {
@@ -87,7 +101,7 @@ function TuteeProfile() { //This needs to be "serverified"
                     ref={calendarRef}
                     plugins={[dayGridPlugin, interaction, timeGrid, rrule]}
                     initialView="dayGridMonth"
-                    eventAdd={event => handleEventAdd(event)}
+                    eventAdd={(event) => handleEventAdd(event)}
                     timeZone="est"
                     
                     headerToolbar={{

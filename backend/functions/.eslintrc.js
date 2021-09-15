@@ -36,5 +36,6 @@ module.exports = {
   'eol-last': ["error", "never"],
   "comma-dangle": [2, "always-multiline"], 
   "max-len": ['off'],
+  "require-jsdoc" : 0,
   },
 };
