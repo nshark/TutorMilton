@@ -161,8 +161,7 @@ if (req.headers?.authorization?.startsWith('Bearer ')) {
 //     gradYear:Number,
 //     createDate:Date,
 //     displayName:String,
-//     calendarEvents:[String, Datetime, Datetime,
-//  Number, String, Boolean, Boolean],
+//     calendarEvents:[Datetime, Datetime, String],
 //     isTutor:Boolean,
 //     dorm:String,
 //     cellPhone:Number
@@ -170,7 +169,7 @@ if (req.headers?.authorization?.startsWith('Bearer ')) {
 
 // app.post('/addUser', async(req,res)=>{
 //     const user:User={
-//          userEmail:
+//          userEmail: req.get("email");
 //     }
 // })
 
@@ -188,7 +187,7 @@ exports.createUser = functions.auth.user().onCreate(async (user) => {
         gradYear: gradYear,
         createDate: db.FieldValue.serverTimestamp(),
         displayName: user.displayName,
-        freePeriods: [],
+        freePeriods: [String, String, String],
         isTutor: false,
         isTutee: false,
         dorm: '',

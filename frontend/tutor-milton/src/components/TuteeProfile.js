@@ -76,9 +76,9 @@ function TuteeProfile() { //This needs to be "serverified"
 
         const getFrees = async () => {
             console.log("hey!")
-            const res = await axios.get('https://us-central1-milton-tutor.cloudfunctions.net/user/FDhtGoOP4lebRlKHda6l')
+            const res = await axios.get('https://us-central1-milton-tutor.cloudfunctions.net/user/test1')
             const data = await res.data
-            console.log("data: "+data)
+            console.log("data: "+data.start+data.end+data.title)
             setFrees(data)
         }
         // const getSessions = async () => {
