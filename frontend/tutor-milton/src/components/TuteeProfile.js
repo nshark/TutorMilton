@@ -142,7 +142,7 @@ arg.event.remove()
   }
 }
 
-                    
+                    // 
                 />
                 </div>
                 <AddEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={event => onEventAdded(event)}/>
