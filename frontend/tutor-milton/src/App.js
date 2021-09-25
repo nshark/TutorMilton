@@ -3,7 +3,8 @@ import { Component } from "react";
 import { BrowserRouter, Route, Switch, useParams } from 'react-router-dom';
 import firebase from 'firebase';
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth";
-import Login from './components/googleLogin';
+import Login from './components/Login';
+import Dashboard from "./components/Dashboard";
 import LandingPage from './components/LandingPage';
 import Error from './components/Error';
 import Header from './components/Header';
@@ -24,13 +25,15 @@ const App = () => {
         <div>
           <Header />
             <Switch>
-             <Route path="/" component={LandingPage} exact/>
+            <Route exact path="/" component={Login}/>
+            <Route exact path="/dashboard" component={Dashboard} />
+             {/* <Route path="/" component={LandingPage} exact/>
              <Route path="/tutorprofile" component={TutorProfile} exact/>
              <Route path="/tuteeprofile" component={TuteeProfile} exact/>
              <Route path="/signin" component={GoogleLogin}/>
              <Route path="/tutorrequests" component={TutorRequest}/>
              <Route path="/pairing/:id"> <PairingPage /> </Route>
-             <Route path="*" component={Error}/>
+             <Route path="*" component={Error}/> */}
            </Switch>
         </div> 
       </BrowserRouter>
