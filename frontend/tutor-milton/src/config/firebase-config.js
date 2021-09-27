@@ -45,6 +45,7 @@ export {
   db,
   signInWithGoogle,
   logout,
+  firebase,
 };
 
 //   firebase.initializeApp(firebaseConfig)

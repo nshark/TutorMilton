@@ -5,7 +5,7 @@ import interaction from '@fullcalendar/interaction';
 import timeGrid, { DayTimeColsView } from '@fullcalendar/timegrid';
 import rrule from '@fullcalendar/rrule';
 import axios from 'axios';
-import firebase from "../config/firebase-config"
+import { db, firebase } from "../config/firebase-config"
 
 
 import Frees from './Frees'
@@ -16,6 +16,7 @@ import { useState } from 'react'
 import './profcomps.css'
 import AddEventModal from './AddEventModal';
 import moment from 'moment';
+const CircularJSON = require('circular-json');
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -42,8 +43,14 @@ function TuteeProfile() { //This needs to be "serverified"
     }
 
     async function handleEventAdd(data) {
-        console.log("data!!!"+data)
-        await axios.put('https://us-central1-milton-tutor.cloudfunctions.net/user/FDhtGoOP4lebRlKHda6l', data.event);
+        console.log("data!!!"+JSON.stringify(data.event))
+        // db.collection("users").where("id", "==", String(firebase.auth().currentUser.uid)).set(JSON.parse( JSON.stringify(data)));
+        try {db.collection("users").doc(String(firebase.auth().currentUser.uid)).update({
+            freePeriods: firebase.firestore.FieldValue.arrayUnion(JSON.stringify(data.event))
+        });} catch(e){
+            console.log(e)
+        }
+        // await axios.put('https://us-central1-milton-tutor.cloudfunctions.net/user/FDhtGoOP4lebRlKHda6l', data.event);
         // console.log("here");
         // const user = firebase.auth.currentUser;
         // const token = user && (await user.getIdToken());
@@ -58,10 +65,31 @@ function TuteeProfile() { //This needs to be "serverified"
         // console.log(res.json());
         // return res.json();
     }
-
     async function handleDatesSet(data) {
-        const response = await axios.get("/api/calendar/get-events?start="+moment(data.start).toISOString()+"&end="+moment(data.end).toISOString());
-        setEvents(response.data);
+        console.log("HEREEEE")
+        await db.collection("users").doc(String(firebase.auth().currentUser.uid)).get()
+        .then(snapshot => {
+            console.log("HEREEEE2"+snapshot.data().freePeriods)
+            const eventt = JSON.parse(snapshot.data().freePeriods)
+            console.log(eventt["title"])
+            let calendarApi = calendarRef.current.getApi()
+            calendarApi.addEvent({
+                start: moment(eventt["start"]).toDate(),
+                end: moment(eventt["end"]).toDate(),
+                title: eventt["title"],
+            });
+            // setEvents(snapshot.data().freePeriods)
+            // frees.map((frees, index)=> {...}
+            
+            // snapshot.data().freePeriods.forEach(free =>{
+            //     console.log("FREE!")
+            //     setEvents(free);
+            // })
+            // setUserDetails(snapshot.data())
+        })
+        // console.log("here:"+data)
+        // const response = await axios.get("/api/calendar/get-events?start="+moment(data.start).toISOString()+"&end="+moment(data.end).toISOString());
+        // setEvents(response.data);
     }
 
     
@@ -71,28 +99,28 @@ function TuteeProfile() { //This needs to be "serverified"
     //   };
 
     
-    useEffect(() => {
+    // useEffect(() => {
         
 
-        const getFrees = async () => {
-            console.log("hey!")
-            const res = await axios.get('https://us-central1-milton-tutor.cloudfunctions.net/user/test1')
-            const data = await res.data
-            console.log("data: "+data.start+data.end+data.title)
-            setFrees(data)
-        }
-        // const getSessions = async () => {
-        //     const res = await fetch('http://localhost:5000/sessions')
-        //     const data2 = await res.json()
-        //     setSessions(data2)
-        // }
+    //     const getFrees = async () => {
+    //         console.log("hey!")
+    //         const res = await axios.get('https://us-central1-milton-tutor.cloudfunctions.net/user/test1')
+    //         const data = await res.data
+    //         console.log("data: "+data.start+data.end+data.title)
+    //         setFrees(data)
+    //     }
+    //     // const getSessions = async () => {
+    //     //     const res = await fetch('http://localhost:5000/sessions')
+    //     //     const data2 = await res.json()
+    //     //     setSessions(data2)
+    //     // }
 
 
-        getFrees()
-        // getSessions()
+    //     getFrees()
+    //     // getSessions()
     
 
-    }, [])
+    // }, [])
 
     // const addFree = async (free) => {
     //     const res = await fetch('http://localhost:5000/frees', {
@@ -133,8 +161,13 @@ right: 'prev,next today'
                     selectable="true"
                     eventClick={
   function(arg){
-    console.log(arg);
     if (window.confirm('Are you sure you want to delete this event?')==true) {
+        console.log(JSON.stringify(arg.event))
+        try {db.collection("users").doc(String(firebase.auth().currentUser.uid)).update({
+            freePeriods: firebase.firestore.FieldValue.arrayRemove(JSON.stringify(arg.event))
+        });} catch(e){
+            console.log(e)
+        }
 arg.event.remove()
 }
     // alert(arg.event.title)
@@ -142,7 +175,7 @@ arg.event.remove()
   }
 }
 
-                    // 
+                    
                 />
                 </div>
                 <AddEventModal isOpen={modalOpen} onClose={() => setModalOpen(false)} onEventAdded={event => onEventAdded(event)}/>
