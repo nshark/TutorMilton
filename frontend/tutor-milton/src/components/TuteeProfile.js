@@ -16,7 +16,6 @@ import { useState } from 'react'
 import './profcomps.css'
 import AddEventModal from './AddEventModal';
 import moment from 'moment';
-const CircularJSON = require('circular-json');
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -69,15 +68,25 @@ function TuteeProfile() { //This needs to be "serverified"
         console.log("HEREEEE")
         await db.collection("users").doc(String(firebase.auth().currentUser.uid)).get()
         .then(snapshot => {
-            console.log("HEREEEE2"+snapshot.data().freePeriods)
-            const eventt = JSON.parse(snapshot.data().freePeriods)
-            console.log(eventt["title"])
-            let calendarApi = calendarRef.current.getApi()
-            calendarApi.addEvent({
-                start: moment(eventt["start"]).toDate(),
-                end: moment(eventt["end"]).toDate(),
-                title: eventt["title"],
-            });
+            snapshot.data().freePeriods.forEach(child => {
+                console.log("yessir"+child)
+                var event = {
+                    title: child["title"],
+                    start: child["start"],
+                    end: child["end"],
+                }
+                .fullCalendar( "renderEvent", event )
+                // let calendarApi = calendarRef.current.getApi()
+                // calendarApi.addEvent({
+                //     start: moment(child["start"]).toDate(),
+                //     end: moment(child["end"]).toDate(),
+                //     title: child["title"],
+                // });
+            })
+            // console.log("HEREEEE2"+snapshot.data().freePeriods[0])
+            // const eventt = JSON.parse(snapshot.data().freePeriods[0])
+            // console.log(eventt["title"])
+           
             // setEvents(snapshot.data().freePeriods)
             // frees.map((frees, index)=> {...}
             
