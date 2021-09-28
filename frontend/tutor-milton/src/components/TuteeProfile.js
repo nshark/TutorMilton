@@ -75,7 +75,7 @@ function TuteeProfile() { //This needs to be "serverified"
                     start: child["start"],
                     end: child["end"],
                 }
-                .fullCalendar( "renderEvent", event )
+                
                 // let calendarApi = calendarRef.current.getApi()
                 // calendarApi.addEvent({
                 //     start: moment(child["start"]).toDate(),
