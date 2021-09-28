@@ -16,6 +16,7 @@ import { useState } from 'react'
 import './profcomps.css'
 import AddEventModal from './AddEventModal';
 import moment from 'moment';
+const CircularJSON = require('circular-json');
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -70,23 +71,16 @@ function TuteeProfile() { //This needs to be "serverified"
         .then(snapshot => {
             snapshot.data().freePeriods.forEach(child => {
                 console.log("yessir"+child)
-                var event = {
-                    title: child["title"],
-                    start: child["start"],
-                    end: child["end"],
-                }
-                
-                // let calendarApi = calendarRef.current.getApi()
-                // calendarApi.addEvent({
-                //     start: moment(child["start"]).toDate(),
-                //     end: moment(child["end"]).toDate(),
-                //     title: child["title"],
-                // });
             })
-            // console.log("HEREEEE2"+snapshot.data().freePeriods[0])
-            // const eventt = JSON.parse(snapshot.data().freePeriods[0])
+            console.log("HEREEEE2"+snapshot.data().freePeriods[0])
+            const eventt = JSON.parse(snapshot.data().freePeriods[0])
             // console.log(eventt["title"])
-           
+            let calendarApi = calendarRef.current.getApi()
+            calendarApi.addEvent({
+                start: moment(eventt["start"]).toDate(),
+                end: moment(eventt["end"]).toDate(),
+                title: eventt["title"],
+            });
             // setEvents(snapshot.data().freePeriods)
             // frees.map((frees, index)=> {...}
             
