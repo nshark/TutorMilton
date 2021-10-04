@@ -7,11 +7,11 @@ import TutoringList from './TutoringList'
 import "./profcomps.css"
 import "./react-datetime.css";
 
-const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher }) => {
+const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher, tutors}) => {
 
 // export default function ({isOpen, onClose, onEventAdded, frees, subject,  teacher}) {
     
-
+    console.log('the array',tutors)
 
 
  
@@ -48,7 +48,7 @@ const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher }
 
 
                 <p>Choose Your Tutors {subject}</p>
-                <TutoringList/>
+                <TutoringList tutees = {tutors}/>
         
             </div>
             </div>

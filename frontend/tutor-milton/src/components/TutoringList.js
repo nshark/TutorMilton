@@ -10,9 +10,10 @@ const TutoringList = ({ tutees, frees, subject, teacher }) => {
 
     const onSubmit = (event) => {
         event.preventDefault();
-        console.log(frees)
+        console.log('what i want',frees)
         console.log(subject)
         console.log(teacher)
+        console.log(tutees)
         if(window.confirm("Confirm Pairings?")){
             console.log('tutors'+ tutees)
         }
@@ -33,7 +34,7 @@ const TutoringList = ({ tutees, frees, subject, teacher }) => {
             <div className="inner-container">
                 
                     <h2 className="top-text">{tut.name} <input type="checkbox" value={tut.id} onChange={onClick} className="tutor-Button"/> </h2>
-                    <h2 className="bottom-text">{tut.time}</h2>
+                    <h2 className="bottom-text">{tut.class}</h2>
              </div>
         ))}
         <input type="submit" className="conf-button" value="Let's Go!"></input>

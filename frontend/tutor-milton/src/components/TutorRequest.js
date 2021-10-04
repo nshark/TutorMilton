@@ -70,7 +70,7 @@ function TutorRequest() {
             console.log(free)
             
             const addStuff = (obj) => {
-                setTutorsList(tutorsList => [...tutorsList, obj]);
+                setTutorsList(tutorsList.push(obj));
             }
     
             function checkTutors(doc1){
@@ -91,12 +91,12 @@ function TutorRequest() {
                 let tempObj = {
                     "name": doc1.data().displayName,
                     "class": doc1.data().subjectsToTutor,
-                    "free": free
+                    "free": free,
+                    "id": doc1.data().uid
                 }
 
                 addStuff(tempObj)
 
-                setTutorsList(tutorsList => [...tutorsList, 'tempObj']);
 
                 console.log(tempObj)
                 
@@ -468,7 +468,7 @@ function TutorRequest() {
                     
                 </div>
 
-                <TutorsModal isOpen={modalOpen} onClose={() => setModalOpen(false)}/>
+                <TutorsModal isOpen={modalOpen} tutors = {tutorsList} onClose={() => setModalOpen(false)}/>
 
                     
             </div>
