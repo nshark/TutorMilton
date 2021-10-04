@@ -3,10 +3,35 @@ import TutorsModal from './TutorsModal'
 import Frees from './Frees'
 import Subjects from './Subjects'
 import Sessions from './Sessions'
+import axios from 'axios';
+import emailjs from "emailjs-com"
 import './profcomps.css'
+import { auth, db, logout } from "../config/firebase-config";
+import {firebase} from "../config/firebase-config"
 
 function TutorRequest() {
+
+    const [tutors, setTutors] = useState([{}])
     
+    function sendEmail(){
+        
+
+        var templateParams = {
+            from_name: firebase.auth().currentUser.displayName,
+            class_name: class2,
+            to_email: email2,
+            person_link: 'http://localhost:3000/pairing/' + class2 + '/' + firebase.auth().currentUser.uid
+            
+        }
+
+        emailjs.send("service_jsnvh9j", "template_jqyyi2j", templateParams, "user_QdL21uWEOg0m5JaXOC1LF")
+        .then((result) => {
+            console.log(result.text);
+
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
     
 
 
@@ -18,6 +43,10 @@ function TutorRequest() {
         const [class2, setClass2] = useState('')
 
         const [modalOpen, setModalOpen] = useState(false);
+
+        const[tutorsList, setTutorsList] = useState([])
+
+        
 
 
 
@@ -39,7 +68,49 @@ function TutorRequest() {
             console.log(email1)
             console.log(class1)
             console.log(free)
+            
+            const addStuff = (obj) => {
+                setTutorsList(tutorsList => [...tutorsList, obj]);
+            }
+    
+            function checkTutors(doc1){
+                
+                console.log(doc1.data())
+                console.log("YES")
 
+                let free = ['no free available']
+
+                db.collection('users').get().then((snapshot) => {
+                    snapshot.docs.forEach(doc => {
+                        if(doc.id == doc1.data().uid){
+                            free = doc.data().freePeriods
+                        }
+                    })
+                })
+
+                let tempObj = {
+                    "name": doc1.data().displayName,
+                    "class": doc1.data().subjectsToTutor,
+                    "free": free
+                }
+
+                addStuff(tempObj)
+
+                setTutorsList(tutorsList => [...tutorsList, 'tempObj']);
+
+                console.log(tempObj)
+                
+
+            }
+        
+            db.collection('tutors').get().then((snapshot) => {
+                snapshot.docs.forEach(doc => {
+                    checkTutors(doc)
+                    console.log('yeah', tutorsList)
+                })
+            })
+
+            
             //Add new page thing here
             setModalOpen(true)
         }
@@ -60,11 +131,17 @@ function TutorRequest() {
             if(window.confirm("Confirm Request?")){
                 console.log(email2)
                 console.log(class2)
+                sendEmail(e);
+           
             }
             else{
                 return
             }
         }
+
+        
+
+        
 
 
         return (

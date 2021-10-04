@@ -109,7 +109,7 @@ const [blogs,setBlogs]=useState([])
 //    </div>
 //  </div>
 <span>
-                <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+                {/* <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
                 <img
                     alt="profile picture"
                     src={firebase.auth().currentUser.photoURL}
@@ -118,7 +118,7 @@ const [blogs,setBlogs]=useState([])
                 <br/>
                 <div className="signout-Div">
                 <button className="conf-button" onClick={this.signOut}>Sign Out!</button>
-                </div>
+                </div> */}
             </span>
   );
 }

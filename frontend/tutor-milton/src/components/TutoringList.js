@@ -1,9 +1,12 @@
 import { FaTimes } from 'react-icons/fa'
 import React, { useState } from 'react';
+import { auth, db, logout } from "../config/firebase-config";
+import {firebase} from "../config/firebase-config"
 
 const TutoringList = ({ tutees, frees, subject, teacher }) => {
     
-    const [tutors, setTutors] = useState([])
+
+
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -11,8 +14,7 @@ const TutoringList = ({ tutees, frees, subject, teacher }) => {
         console.log(subject)
         console.log(teacher)
         if(window.confirm("Confirm Pairings?")){
-            console.log(tutors)
-          
+            console.log('tutors'+ tutees)
         }
         else{
             return
@@ -21,7 +23,7 @@ const TutoringList = ({ tutees, frees, subject, teacher }) => {
     }
 
     const onClick = () => {
-        setTutors( arr => [ ...arr, `${arr.length}` ]);
+        // setTutors( arr => [ ...arr, `${arr.length}` ]);
     };
 
     return(

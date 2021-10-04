@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import Modal from "react-modal";
-
+import { auth, db, logout } from "../config/firebase-config";
+import {firebase} from "../config/firebase-config"
 import Datetime from 'react-datetime';
 import TutoringList from './TutoringList'
 import "./profcomps.css"
@@ -10,8 +11,15 @@ const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher }
 
 // export default function ({isOpen, onClose, onEventAdded, frees, subject,  teacher}) {
     
-    
+
+
+
+ 
+
     const onSubmit = (event) => {
+        
+        
+
         event.preventDefault();
         console.log(frees)
         console.log(subject)
@@ -38,12 +46,10 @@ const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher }
             
             <div className="tutor-background-Form">
 
-            {/* <form onSubmit={onSubmit}> */}
-                <p>Choose Your Tutors {subject}</p>
-                <TutoringList />
 
-                {/* <input type="submit" className="conf-button" value="Let's Go!"></input> */}
-            {/* </form> */}
+                <p>Choose Your Tutors {subject}</p>
+                <TutoringList/>
+        
             </div>
             </div>
             </div>

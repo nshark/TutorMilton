@@ -93,7 +93,7 @@ class App extends Component {
              <Route path="/tuteeprofile" component={TuteeProfile} exact/>
              <Route path="/signin" component={GoogleLogin}/>
              <Route path="/tutorrequests" component={TutorRequest}/>
-             <Route path="/pairing/:id"> <PairingPage /> </Route>
+             <Route path="/pairing/:course/:id"> <PairingPage /> </Route>
              <Route path="*" component={Error}/>
            </Switch>
         </div> 
