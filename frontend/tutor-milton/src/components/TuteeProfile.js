@@ -16,7 +16,6 @@ import { useState } from 'react'
 import './profcomps.css'
 import AddEventModal from './AddEventModal';
 import moment from 'moment';
-const CircularJSON = require('circular-json');
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -34,22 +33,23 @@ function TuteeProfile() { //This needs to be "serverified"
     const calendarRef = useRef(null);
 
     const onEventAdded = (event) => {
-        let calendarApi = calendarRef.current.getApi()
-        calendarApi.addEvent({
-            start: moment(event.start).toDate(),
-            end: moment(event.end).toDate(),
-            title: event.title,
-        });
+        // let calendarApi = calendarRef.current.getApi()
+        // calendarApi.addEvent({
+        //     start: moment(event.start).toDate(),
+        //     end: moment(event.end).toDate(),
+        //     title: event.title,
+        // });
     }
 
-    async function handleEventAdd(data) {
+     function handleEventAdd(data) {
         console.log("data!!!"+JSON.stringify(data.event))
+        console.log("did fire?")
         // db.collection("users").where("id", "==", String(firebase.auth().currentUser.uid)).set(JSON.parse( JSON.stringify(data)));
-        try {db.collection("users").doc(String(firebase.auth().currentUser.uid)).update({
-            freePeriods: firebase.firestore.FieldValue.arrayUnion(JSON.stringify(data.event))
-        });} catch(e){
-            console.log(e)
-        }
+        // try {db.collection("users").doc(String(firebase.auth().currentUser.uid)).update({
+        //     freePeriods: firebase.firestore.FieldValue.arrayUnion(JSON.stringify(data.event))
+        // });} catch(e){
+        //     console.log(e)
+        // }
         // await axios.put('https://us-central1-milton-tutor.cloudfunctions.net/user/FDhtGoOP4lebRlKHda6l', data.event);
         // console.log("here");
         // const user = firebase.auth.currentUser;
@@ -77,6 +77,7 @@ function TuteeProfile() { //This needs to be "serverified"
             // console.log(eventt["title"])
             let calendarApi = calendarRef.current.getApi()
             calendarApi.addEvent({
+                timeZone: "UTC",
                 start: moment(eventt["start"]).toDate(),
                 end: moment(eventt["end"]).toDate(),
                 title: eventt["title"],
@@ -151,7 +152,11 @@ function TuteeProfile() { //This needs to be "serverified"
                     plugins={[dayGridPlugin, interaction, timeGrid, rrule]}
                     initialView="dayGridMonth"
                     eventAdd={(event) => handleEventAdd(event)}
-                    datesSet={(date) => handleDatesSet(date)}
+                    // datesSet={(date) => handleDatesSet(date)}
+                    // initialEvents={() => this.calendarValue}
+                    initialEvents={[
+                { title: 'event 1', start: '2021-10-15', end: '2021-10-30' },
+                { title: 'event 2', start: '2021-10-15', end: '2021-10-30'}]}
                     timeZone="est"
                     
                     headerToolbar={{
