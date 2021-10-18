@@ -26,7 +26,9 @@ export default class LandingPage extends Component {
               uiConfig={this.uiConfig}
               firebaseAuth={firebase.auth()}
             />
+            
           </div>
+          
             )
         }
     }

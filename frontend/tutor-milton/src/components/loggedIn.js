@@ -121,10 +121,13 @@ function LoggedIn () {
                 <button className="conf-button" onClick={signOut}>Sign Out!</button>
                 </div>
                 <div className="dashboard">
+                  
        <div className="dashboard__container">
+       <p className="credits">Made by Gunner Peterson, Peter Perry, Sebastian Park, and Victoria Cheng</p>
      <div className="App">
-     <h4>Home</h4>
-     <button onClick={()=> firebase.auth().signOut()}>Sign out</button>
+     
+   
+
        {/* {
          blogs && blogs.map(blog=>{
           return(

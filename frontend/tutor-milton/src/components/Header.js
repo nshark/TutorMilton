@@ -15,9 +15,9 @@ const Header = ({ loggedIn, username }) => {
                         <NavLink exact to="/" className="Navigation" activeClassName="activeRoute">Home</NavLink>
                     </li>
                     
-                    <li> 
+                    {/* <li> 
                         <NavLink exact to="/tuteeprofile" className="Navigation" activeClassName="activeRoute">My Profile</NavLink>
-                    </li>
+                    </li> */}
                         
             
                     <li>
@@ -25,15 +25,7 @@ const Header = ({ loggedIn, username }) => {
                     </li>
                 </div>
             <div className="top-bar-nav">
-                {loggedIn ? ([
-                    <p className="nav-element">{`Hello, ${username}.`}</p>,
-                    <NavLink exact to="/login" className="nav-element nav-button">Logout</NavLink>
-                    
-                ]
-                ) : (
-                    <NavLink exact to="/login" className="nav-element nav-button">Login</NavLink>
-                )
-                }
+
  
             </div>
         </header>

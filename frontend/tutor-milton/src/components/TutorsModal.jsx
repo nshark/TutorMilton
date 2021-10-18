@@ -11,7 +11,7 @@ const TutorsModal = ({ isOpen, onClose, onEventAdded, frees, subject,  teacher, 
 
 // export default function ({isOpen, onClose, onEventAdded, frees, subject,  teacher}) {
     
-    console.log('the array',tutors)
+    
 
 
  

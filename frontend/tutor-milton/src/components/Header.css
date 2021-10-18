@@ -202,3 +202,7 @@
     align-items: center;
     height: 100px;
   }
+
+  .credits{
+    font-size: 30px;
+  }

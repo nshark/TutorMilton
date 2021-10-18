@@ -57,6 +57,7 @@ import TutorProfile from './components/TutorProf';
 import GoogleLogin from './components/googleLogin';
 import TutorRequest from './components/TutorRequest';
 import PairingPage from './components/PairingPage';
+import RegisterPage from './components/RegisterPage';
 import Modal from 'react-modal';
 import { auth } from "./config/firebase-config"
 import LoginButton from './components/loginButton'
@@ -94,6 +95,7 @@ class App extends Component {
              <Route path="/signin" component={GoogleLogin}/>
              <Route path="/tutorrequests" component={TutorRequest}/>
              <Route path="/pairing/:course/:id"> <PairingPage /> </Route>
+             <Route path="/register/:course/:id"> <RegisterPage /> </Route>
              <Route path="*" component={Error}/>
            </Switch>
         </div> 

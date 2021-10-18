@@ -11,7 +11,19 @@ import {firebase} from "../config/firebase-config"
 
 function TutorRequest() {
 
-    const [tutors, setTutors] = useState([{}])
+    function findTutorEmails(c){
+        var tutorslist = []
+        db.collection('tutors').get().then((snapshot) => {
+            snapshot.docs.forEach(doc => {
+                if(doc.data().subjectsToTutor == c){
+                    tutorsList.append(doc.data().email)
+                }
+            })
+        })
+
+        return tutorsList;
+    }
+
     
     function sendEmail(){
         
@@ -20,7 +32,7 @@ function TutorRequest() {
             from_name: firebase.auth().currentUser.displayName,
             class_name: class2,
             to_email: email2,
-            person_link: 'http://localhost:3000/pairing/' + class2 + '/' + firebase.auth().currentUser.uid
+            person_link: 'http://localhost:3000/pairing/' + encodeURIComponent(class2) + '/' + firebase.auth().currentUser.uid
             
         }
 
@@ -32,24 +44,40 @@ function TutorRequest() {
             console.log(error.text);
         });
     }
+
+    function sendEmail2(){
+
+        var templateParams = {
+            from_name: firebase.auth().currentUser.displayName,
+            class_name: class1,
+            tutor_emails: findTutorEmails(class1),
+            person_link: 'http://localhost:3000/register/' + encodeURIComponent(class1) + '/' + firebase.auth().currentUser.uid
+            
+        }
+
+        emailjs.send("service_jsnvh9j", "template_0zjm2a1", templateParams, "user_QdL21uWEOg0m5JaXOC1LF")
+        .then((result) => {
+            console.log(result.text);
+
+        }, (error) => {
+            console.log(error.text);
+        });
+    }
     
 
 
-        const [email1, setEmail1] = useState('')
-        const [class1, setClass1] = useState('')
-        const [free, setFree] = useState('')
+        const [email1, setEmail1] = useState('');
+        const [class1, setClass1] = useState('');
+        const [free, setFree] = useState('');
 
-        const [email2, setEmail2] = useState('')
-        const [class2, setClass2] = useState('')
+        const [email2, setEmail2] = useState('');
+        const [class2, setClass2] = useState('');
 
         const [modalOpen, setModalOpen] = useState(false);
 
-        const[tutorsList, setTutorsList] = useState([])
+        const[tutorsList, setTutorsList] = useState([]);
 
         
-
-
-
         const onSubmit1 = (e) =>{
             e.preventDefault()
 
@@ -65,54 +93,19 @@ function TutorRequest() {
                 alert('please select a free')
                 return
             }
-            console.log(email1)
-            console.log(class1)
-            console.log(free)
-            
-            const addStuff = (obj) => {
-                setTutorsList(tutorsList.push(obj));
+
+            if(window.confirm("Confirm Request?")){
+                console.log(email1)
+                console.log(class1)
+                console.log(free)
+                console.log('http://localhost:3000/register/' + encodeURIComponent(class1) + '/' + encodeURIComponent(firebase.auth().currentUser.uid))
+                sendEmail2(e);
+                alert("Request Sent!")
             }
-    
-            function checkTutors(doc1){
-                
-                console.log(doc1.data())
-                console.log("YES")
-
-                let free = ['no free available']
-
-                db.collection('users').get().then((snapshot) => {
-                    snapshot.docs.forEach(doc => {
-                        if(doc.id == doc1.data().uid){
-                            free = doc.data().freePeriods
-                        }
-                    })
-                })
-
-                let tempObj = {
-                    "name": doc1.data().displayName,
-                    "class": doc1.data().subjectsToTutor,
-                    "free": free,
-                    "id": doc1.data().uid
-                }
-
-                addStuff(tempObj)
-
-
-                console.log(tempObj)
-                
-
+            else{
+                return
             }
-        
-            db.collection('tutors').get().then((snapshot) => {
-                snapshot.docs.forEach(doc => {
-                    checkTutors(doc)
-                    console.log('yeah', tutorsList)
-                })
-            })
-
             
-            //Add new page thing here
-            setModalOpen(true)
         }
 
         const onSubmit2 = (e) =>{
@@ -131,17 +124,16 @@ function TutorRequest() {
             if(window.confirm("Confirm Request?")){
                 console.log(email2)
                 console.log(class2)
+                console.log(encodeURIComponent(class2))
+                console.log('http://localhost:3000/pairing/' + encodeURIComponent(class2) + '/' + encodeURIComponent(firebase.auth().currentUser.uid))
                 sendEmail(e);
+                alert("Email Sent!")
            
             }
             else{
                 return
             }
         }
-
-        
-
-        
 
 
         return (
@@ -296,18 +288,13 @@ function TutorRequest() {
                     </div>
 
                     <div class="dropdown">
-                        <select onclick="myFunction()" class="dropbtn" onChange={(e)=> setFree(e.target.value)}>
-                            <option selected disabled>Choose Your Frees</option>
-                            <option value="free1">Intensive Classical Greek</option>
-                            <option value="free2">Adv Greek: Plato</option>
-                            <option value="free3">Latin 2/3 (Accelerated)</option>
-                        </select>
+                    <p></p>
                         <input placeholder="Add Your Teacher's Email" className="txt-Box2"  value={email1} onChange={(e)=> setEmail1(e.target.value)}/>
                     </div>
 
                 
                     
-                    <div><input type="submit" className="conf-button" ></input></div>
+                    <div class="custom-pad"><input type="submit" className="conf-button" ></input></div>
                     </form>
                     
                     </div>
