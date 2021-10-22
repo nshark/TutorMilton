@@ -52,13 +52,14 @@ function RegisterPage() {
 
     var templateParams = {
         from_name: firebase.auth().currentUser.displayName,
+        from_email: firebase.auth().currentUser.email,
         class_name: course,
         to_name: userName,
         to_email: email,
         
     }
 
-    emailjs.send("service_jsnvh9j", "template_jqyyi2j", templateParams, "user_QdL21uWEOg0m5JaXOC1LF")
+    emailjs.send("service_jsnvh9j", "template_6p9i4f4", templateParams, "user_QdL21uWEOg0m5JaXOC1LF")
     .then((result) => {
         console.log(result.text);
 

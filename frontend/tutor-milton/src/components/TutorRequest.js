@@ -16,11 +16,12 @@ function TutorRequest() {
         db.collection('tutors').get().then((snapshot) => {
             snapshot.docs.forEach(doc => {
                 if(doc.data().subjectsToTutor == c){
-                    tutorsList.append(doc.data().email)
+                    tutorsList.push(doc.data().email)
                 }
             })
         })
 
+        console.log(tutorsList)
         return tutorsList;
     }
 
@@ -46,11 +47,12 @@ function TutorRequest() {
     }
 
     function sendEmail2(){
-
+        
         var templateParams = {
             from_name: firebase.auth().currentUser.displayName,
             class_name: class1,
             tutor_emails: findTutorEmails(class1),
+            free: free,
             person_link: 'http://localhost:3000/register/' + encodeURIComponent(class1) + '/' + firebase.auth().currentUser.uid
             
         }
@@ -290,6 +292,8 @@ function TutorRequest() {
                     <div class="dropdown">
                     <p></p>
                         <input placeholder="Add Your Teacher's Email" className="txt-Box2"  value={email1} onChange={(e)=> setEmail1(e.target.value)}/>
+     
+                        <input placeholder="When can you meet?" className="txt-Box2"  value={free} onChange={(e)=> setFree(e.target.value)}/>
                     </div>
 
                 
