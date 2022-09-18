@@ -16,13 +16,13 @@ function DormChoice() {
                 <button class="dropbtn">My Dorm</button>
                 <div class="dropdown-content">
                     <a href="#">Norris</a>
-                    <a href="#">Millit</a>
+                    <a href="#">Millet</a>
                     <a href="#">Hallowell</a>
                     <a href="#">Forbes</a>
                     <a href="#">Wolcott</a>
                     <a href="#">Goodwin</a>
                     <a href="#">Robins</a>
-                    <a href="#">Hathoway</a>
+                    <a href="#">Hathaway</a>
                 </div>
             </div>
             </header>
