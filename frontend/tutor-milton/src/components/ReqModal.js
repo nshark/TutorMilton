@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Modal from "react-modal";
 import { auth, db, logout } from "../config/firebase-config";
 import {firebase} from "../config/firebase-config"
-import Datetime from 'react-datetime';
+//import Datetime from 'react-datetime';
 import TutoringList from './TutoringList'
 import "./profcomps.css"
 import "./react-datetime.css";
