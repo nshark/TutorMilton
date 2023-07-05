@@ -4,7 +4,7 @@ import './profcomps.css';
 import SubjectList from './SubjectList'
 import { useState } from 'react'
 
-const Subjects = ({ subject, onAddSub, showSub }) => {
+const Subjects = ({ subject, onAddSub, showSub}) => {
     
  
     

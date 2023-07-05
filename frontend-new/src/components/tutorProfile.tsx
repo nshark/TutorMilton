@@ -1,4 +1,10 @@
 import {useEffect, useState} from "react";
+import Tutoring from './tutoring.tsx'
+import AvailabilitySwitch from "./avaibilitySwitch.tsx";
+import DormChoice from "./dormChoice.tsx";
+import AddSub from "./AddSub.tsx";
+import AddFree from "./AddFree.tsx";
+import Subjects from "./subjects.tsx";
 //TODO MAKE SURE THAT THE LOCALHOST ARE CHANGED TO tutormilton.com BEFORE RELEASE!
 export default function TutorProfile(){
     const [subjects, setSubjects] = useState([])
@@ -35,7 +41,7 @@ export default function TutorProfile(){
 
 
     }, [])
-    const addSub = async (subject) => {
+    const addSub = async (subject:JSON) => {
         const res = await fetch('http://localhost:5000/subjects', {
             method: 'POST',
             headers: {
@@ -49,7 +55,7 @@ export default function TutorProfile(){
         setSubjects([...subjects, data])
 
     }
-    const addFree = async (free) => {
+    const addFree = async (free:JSON) => {
         const res = await fetch('http://localhost:5000/frees', {
             method: 'POST',
             headers: {
@@ -79,7 +85,7 @@ export default function TutorProfile(){
                     {showAddSub2 && <AddSub onAddSub={addSub}/>}
                     {showAddFree2 && <AddFree onAddFree={addFree}/>}
 
-                    <Subjects subject={subjects} onAddSub = {()=>setShowAddSub(!showAddSub2)} showAddSub={showAddSub2}/>
+                    <Subjects subject={subjects} onAddSub = {()=>setShowAddSub(!showAddSub2)} showSub={showAddSub2}/>
                     <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showAddFree={showAddFree2}/>
 
                 </div>
