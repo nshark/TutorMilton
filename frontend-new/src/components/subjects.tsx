@@ -1,10 +1,8 @@
 import PropTypes from 'prop-types';
-import AddSub from './AddSub'
 import './profcomps.css';
-import SubjectList from './SubjectList'
-import { useState } from 'react'
+import SubjectList from './subjectList'
 
-const Subjects = ({ subject, onAddSub, showSub}) => {
+function Subjects({ subject, onAddSub, showSub}) {
 
 
 

@@ -28,6 +28,7 @@ function App() {
                             <Route path="/" element={<Dashboard />}/>
                             <Route path="/signin" element={<GoogleLogin/>}/>
                             <Route path="/tutorprofile" element={<TutorProfile/>}/>
+                            <Route path="/tuteeprofile" element={<TuteeProfile/>}/>
                             <Route path="/tutorrequests" element={<TutorRequest/>}/>
                             <Route path="/pairing/:course/:id"> <PairingPage /> </Route>
                             <Route path="/register/:course/:id"> <RegisterPage /> </Route>

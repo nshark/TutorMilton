@@ -5,6 +5,7 @@ import DormChoice from "./dormChoice.tsx";
 import AddSub from "./AddSub.tsx";
 import AddFree from "./AddFree.tsx";
 import Subjects from "./subjects.tsx";
+import Frees from "./Frees.tsx"
 //TODO MAKE SURE THAT THE LOCALHOST ARE CHANGED TO tutormilton.com BEFORE RELEASE!
 export default function TutorProfile(){
     const [subjects, setSubjects] = useState([])
@@ -86,7 +87,7 @@ export default function TutorProfile(){
                     {showAddFree2 && <AddFree onAddFree={addFree}/>}
 
                     <Subjects subject={subjects} onAddSub = {()=>setShowAddSub(!showAddSub2)} showSub={showAddSub2}/>
-                    <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showAddFree={showAddFree2}/>
+                    <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showFree={showAddFree2}/>
 
                 </div>
 
