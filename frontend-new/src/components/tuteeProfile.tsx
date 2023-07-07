@@ -1,10 +1,9 @@
-import React, { Component, useEffect  } from 'react';
+import { useEffect } from 'react';
 
 import Frees from './Frees'
 import Sessions from './Sessions'
 import AddFree from './AddFree'
 import { useState } from 'react'
-import './profcomps.css'
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -52,7 +51,6 @@ function TuteeProfile() { //This needs to be "serverified"
 
 
     return (
-
         <div className="App-bg">
 
 
@@ -65,13 +63,12 @@ function TuteeProfile() { //This needs to be "serverified"
                 <div className="column">
 
                     {showAddFree2 && <AddFree onAddFree={addFree}/>}
-                    <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showAddFree={showAddFree2}/>
+                    <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showFree={showAddFree2}/>
 
                 </div>
 
             </div>
         </div>
-
     );
 }
 

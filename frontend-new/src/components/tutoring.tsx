@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './profcomps.css';
-import TutoringList from './TutoringList'
+import TutoringList from './tutoringList'
 
 function Tutoring({ tutee }){
     return (

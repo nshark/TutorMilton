@@ -3,6 +3,8 @@ import { onAuthStateChanged } from 'firebase/auth';
 import 'firebaseui/dist/firebaseui.css';
 import {auth} from "firebaseui";
 
+import {auth as auth1} from "firebaseui";
+
 interface Props {
     // The Firebase UI Web UI Config object.
     // See: https://github.com/firebase/firebaseui-web#configuration
@@ -18,24 +20,19 @@ interface Props {
 
 
 const StyledFirebaseAuth = ({uiConfig, firebaseAuth, className, uiCallback}: Props) => {
-    const [firebaseui, setFirebaseui] = useState<typeof import('firebaseui') | null>(null);
     const [userSignedIn, setUserSignedIn] = useState(false);
     const elementRef = useRef(null);
 
     useEffect(() => {
         // Firebase UI only works on the Client. So we're loading the package only after
         // the component has mounted, so that this works when doing server-side rendering.
-        // eslint-disable-next-line @typescript-eslint/no-var-requires
-        setFirebaseui(require('firebaseui'));
+
     }, []);
 
 
     useEffect(() => {
-        if (firebaseui === null )
-            return;
-
         // Get or Create a firebaseUI instance.
-        const firebaseUiWidget = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(firebaseAuth);
+        const firebaseUiWidget = auth1.AuthUI.getInstance() || new auth1.AuthUI(firebaseAuth);
         if (uiConfig.signInFlow === 'popup')
             firebaseUiWidget.reset();
 
@@ -60,7 +57,7 @@ const StyledFirebaseAuth = ({uiConfig, firebaseAuth, className, uiCallback}: Pro
             firebaseUiWidget.reset();
         };
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [firebaseui, uiConfig]);
+    }, [uiConfig]);
 
     return <div className={className} ref={elementRef} />;
 };

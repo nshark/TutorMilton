@@ -1,7 +1,7 @@
 import {FormEvent, useState} from 'react'
 import './Header.css'
 
-function AddSub({onAddSub}) {
+function AddSub({onAddSub}: {onAddSub: (subject:JSON) => void}) {
     const [subjectText, setSubjectText] = useState('')
 
 
@@ -13,7 +13,7 @@ function AddSub({onAddSub}) {
             return
         }
 
-        onAddSub({subjectText})
+        onAddSub(JSON.parse(subjectText))
 
         setSubjectText('')
     }

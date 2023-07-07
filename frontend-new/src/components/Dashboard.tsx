@@ -1,5 +1,6 @@
-import firebase from "firebase";
+import {auth} from "../config/firebase-config.ts";
 import {MouseEvent, useState} from "react";
+import Header from "./Header.tsx";
 
 function Dashboard() {
     const [info] = useState([]);
@@ -8,7 +9,7 @@ function Dashboard() {
         e.preventDefault()
 
         if(window.confirm("Are you sure you want to sign out?")){
-            await firebase.auth().signOut().then(function() {
+            await auth.signOut().then(function() {
                 console.log("Successfully signed out.")
 
             }).catch(function(error) {
@@ -23,11 +24,11 @@ function Dashboard() {
 
 
     }
-    return (<span>
-                <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+    return (<span><Header/>
+                <h1>Welcome {auth.currentUser.displayName}</h1>
                 <img
                     alt="profile picture"
-                    src={firebase.auth().currentUser.photoURL}
+                    src={auth.currentUser.photoURL}
                     className="prof-img"
                 />
                 <br/>

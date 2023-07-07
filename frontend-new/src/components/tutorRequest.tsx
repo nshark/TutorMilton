@@ -1,21 +1,21 @@
 import {FormEvent, useState} from 'react';
 import emailjs from "emailjs-com"
 import './profcomps.css'
-import {db} from "../config/firebase-config";
-import {firebase} from "../config/firebase-config"
-
+import {db, auth} from "../config/firebase-config";
+import {getDocs, query} from "firebase/firestore";
+import {collection} from "../config/firebase-config.ts";
+import Header from "./Header.tsx"
 function TutorRequest() {
 
-    function findTutorEmails(c:string){
-        const tutorsList:string[] = []
-        db.collection('tutors').get().then((snapshot) => {
-            snapshot.docs.forEach(doc => {
-                if(doc.data().subjectsToTutor == c){
-                    tutorsList.push(doc.data().email)
-                }
-            })
+    async function findTutorEmails(c: string) {
+        const tutorsList: string[] = []
+        const q = query(collection(db, "tutors"))
+        const querySnapshot = await getDocs(q);
+        querySnapshot.forEach(doc => {
+            if (doc.data().subjectsToTutor == c) {
+                tutorsList.push(doc.data().email)
+            }
         })
-
         console.log(tutorsList)
         return tutorsList;
     }
@@ -25,10 +25,10 @@ function TutorRequest() {
 
 
         const templateParams:Record<string, unknown>  = {
-            from_name: firebase.auth().currentUser.displayName,
+            from_name: auth.currentUser.displayName,
             class_name: class2,
             to_email: email2,
-            person_link: 'http://tutormilton/pairing/' + encodeURIComponent(class2) + '/' + firebase.auth().currentUser.uid
+            person_link: 'http://tutormilton.com/pairing/' + encodeURIComponent(class2) + '/' + auth.currentUser.uid
 
         }
 
@@ -44,11 +44,11 @@ function TutorRequest() {
     function sendEmail2(){
 
         const templateParams:Record<string, unknown> = {
-            from_name: firebase.auth().currentUser.displayName,
+            from_name: auth.currentUser.displayName,
             class_name: class1,
             tutor_emails: findTutorEmails(class1),
             free: free,
-            person_link: 'http://tutormilton/register/' + encodeURIComponent(class1) + '/' + firebase.auth().currentUser.uid
+            person_link: 'http://tutormilton.com/register/' + encodeURIComponent(class1) + '/' + auth.currentUser.uid
         }
 
         emailjs.send("service_jsnvh9j", "template_0zjm2a1", templateParams, "user_QdL21uWEOg0m5JaXOC1LF")
@@ -90,7 +90,7 @@ function TutorRequest() {
             console.log(email1)
             console.log(class1)
             console.log(free)
-            console.log('http://tutormilton/register/' + encodeURIComponent(class1) + '/' + encodeURIComponent(firebase.auth().currentUser.uid))
+            console.log('http://tutormilton.com/register/' + encodeURIComponent(class1) + '/' + encodeURIComponent(auth.currentUser.uid))
             sendEmail2();
             alert("Request Sent!")
         }
@@ -117,7 +117,7 @@ function TutorRequest() {
             console.log(email2)
             console.log(class2)
             console.log(encodeURIComponent(class2))
-            console.log('http://tutormilton/pairing/' + encodeURIComponent(class2) + '/' + encodeURIComponent(firebase.auth().currentUser.uid))
+            console.log('http://tutormilton.com/pairing/' + encodeURIComponent(class2) + '/' + encodeURIComponent(auth.currentUser.uid))
             sendEmail();
             alert("Email Sent!")
 
@@ -131,9 +131,8 @@ function TutorRequest() {
     return (
 
 
-
         <div className="App-bg">
-
+            <Header/>
 
             <div className="row">
 
@@ -142,7 +141,7 @@ function TutorRequest() {
                         <p>Click here to request tutoring</p>
                         <form id="request-form" onSubmit={ onSubmit1 }>
                             <div className="dropdown">
-                                <select onClick="myFunction()" class="dropbtn" onChange={(e)=> setClass1(e.target.value)}>
+                                <select className="dropbtn" onChange={(e)=> setClass1(e.target.value)}>
 
                                     <option selected disabled className="dropbtn-Title">Select a course</option>
                                     <option disabled>Classics</option>
@@ -316,7 +315,7 @@ function TutorRequest() {
                         <p>Add a subject to tutor</p>
                         <form id="subject-form" onSubmit={ onSubmit2 }>
                             <div className="dropdown">
-                                <select onClick="myFunction()" class="dropbtn" onChange={(e)=> setClass2(e.target.value)}>
+                                <select className="dropbtn" onChange={(e)=> setClass2(e.target.value)}>
 
                                     <option selected disabled className="dropbtn-Title">Select a course</option>
                                     <option disabled>Classics</option>

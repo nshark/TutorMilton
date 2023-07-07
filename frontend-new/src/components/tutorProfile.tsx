@@ -15,7 +15,6 @@ export default function TutorProfile(){
 
     const [showAddSub2, setShowAddSub] = useState (false)
     const [showAddFree2, setShowAddFree] = useState (false)
-    //TODO figure out a way to remove the awaits.
     useEffect(() => {
 
         const getSubjects = async () => {

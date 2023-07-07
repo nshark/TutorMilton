@@ -1,7 +1,7 @@
 import {FormEvent, useState} from 'react'
 import './Header.css'
 
-function AddFree({onAddFree}) {
+function AddFree({onAddFree} : {onAddFree: (free:JSON) => void}) {
 
     const [freeText, setFreeText] = useState('')
 
@@ -14,7 +14,7 @@ function AddFree({onAddFree}) {
             return
         }
 
-        onAddFree({freeText})
+        onAddFree(JSON.parse(freeText))
 
         setFreeText('')
     }

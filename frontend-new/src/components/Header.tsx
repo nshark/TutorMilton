@@ -1,7 +1,8 @@
 import {NavLink} from "react-router-dom";
+<style>
 import "./Header.css"
-
-export default function Header(){console.log("we got there?"); return(<header className="App-header">
+</style>
+export default function Header(){ return(<header className="App-header">
     <h1 className="top-bar-title">
         <span className="top-bar-title-tutor">Tutor</span>
         <span className="top-bar-title-milton">Milton</span>

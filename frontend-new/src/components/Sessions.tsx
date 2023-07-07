@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import './profcomps.css';
-import SessionsList from './SessionsList';
+import SessionsList from './SessionsList.tsx';
 
 function Sessions({ session }) {
     return (

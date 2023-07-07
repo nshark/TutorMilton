@@ -1,6 +1,6 @@
 import { FaTimes } from 'react-icons/fa'
 
-function FreeList(frees:any[]){
+function FreeList(frees){
 
 
     return(
