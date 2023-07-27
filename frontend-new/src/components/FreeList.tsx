@@ -1,13 +1,13 @@
-import { FaTimes } from 'react-icons/fa'
+import {FaTimes} from 'react-icons/fa'
 
-function FreeList(frees){
+function FreeList(frees) {
 
 
-    return(
+    return (
         <>
             {frees.map((free) => (
                 <div className="inner-container">
-                    <h1 className="top-text">{free.freeText} <FaTimes style={{ color: 'red', cursor: 'pointer'}}/> </h1>
+                    <h1 className="top-text">{free.freeText} <FaTimes style={{color: 'red', cursor: 'pointer'}}/></h1>
                 </div>
             ))}
         </>

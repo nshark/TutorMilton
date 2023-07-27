@@ -7,14 +7,14 @@ import AddFree from "./AddFree.tsx";
 import Subjects from "./subjects.tsx";
 import Frees from "./Frees.tsx"
 //TODO MAKE SURE THAT THE LOCALHOST ARE CHANGED TO tutormilton.com BEFORE RELEASE!
-export default function TutorProfile(){
+export default function TutorProfile() {
     const [subjects, setSubjects] = useState([])
     const [frees, setFrees] = useState([])
     const [tutees, setTutees] = useState([])
 
 
-    const [showAddSub2, setShowAddSub] = useState (false)
-    const [showAddFree2, setShowAddFree] = useState (false)
+    const [showAddSub2, setShowAddSub] = useState(false)
+    const [showAddFree2, setShowAddFree] = useState(false)
     useEffect(() => {
 
         const getSubjects = async () => {
@@ -41,7 +41,7 @@ export default function TutorProfile(){
 
 
     }, [])
-    const addSub = async (subject:JSON) => {
+    const addSub = async (subject: JSON) => {
         const res = await fetch('http://localhost:5000/subjects', {
             method: 'POST',
             headers: {
@@ -50,12 +50,12 @@ export default function TutorProfile(){
             body: JSON.stringify(subject)
         })
 
-        const data  = await res.json()
+        const data = await res.json()
 
         setSubjects([...subjects, data])
 
     }
-    const addFree = async (free:JSON) => {
+    const addFree = async (free: JSON) => {
         const res = await fetch('http://localhost:5000/frees', {
             method: 'POST',
             headers: {
@@ -64,7 +64,7 @@ export default function TutorProfile(){
             body: JSON.stringify(free)
         })
 
-        const data  = await res.json()
+        const data = await res.json()
 
         setFrees([...frees, data])
     }
@@ -75,9 +75,9 @@ export default function TutorProfile(){
             <div className="row">
 
                 <div className="column">
-                    <Tutoring tutee = {tutees}/>
-                    <DormChoice />
-                    <AvailabilitySwitch />
+                    <Tutoring tutee={tutees}/>
+                    <DormChoice/>
+                    <AvailabilitySwitch/>
                 </div>
 
                 <div className="column">
@@ -85,8 +85,8 @@ export default function TutorProfile(){
                     {showAddSub2 && <AddSub onAddSub={addSub}/>}
                     {showAddFree2 && <AddFree onAddFree={addFree}/>}
 
-                    <Subjects subject={subjects} onAddSub = {()=>setShowAddSub(!showAddSub2)} showSub={showAddSub2}/>
-                    <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showFree={showAddFree2}/>
+                    <Subjects subject={subjects} onAddSub={() => setShowAddSub(!showAddSub2)} showSub={showAddSub2}/>
+                    <Frees free={frees} onAddFree={() => setShowAddFree(!showAddFree2)} showFree={showAddFree2}/>
 
                 </div>
 

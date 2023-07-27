@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './profcomps.css';
 import TutoringList from './tutoringList'
 
-function Tutoring({ tutee }){
+function Tutoring({tutee}) {
     return (
 
         <div className="prof-container">
@@ -12,7 +12,7 @@ function Tutoring({ tutee }){
                     <span className="top-bar-title-tutor">Currently Tutoring</span>
                 </h1>
 
-                <TutoringList tutees = {tutee} />
+                <TutoringList tutees={tutee}/>
 
             </header>
 

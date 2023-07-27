@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import './profcomps.css';
 import SessionsList from './SessionsList.tsx';
 
-function Sessions({ session }) {
+function Sessions({session}) {
     return (
         <div className="prof-container">
 
@@ -11,7 +11,7 @@ function Sessions({ session }) {
                     <span className="top-bar-title-tutor">Currently Tutoring</span>
                 </h1>
 
-                <SessionsList sessions = { session } />
+                <SessionsList sessions={session}/>
 
             </header>
 

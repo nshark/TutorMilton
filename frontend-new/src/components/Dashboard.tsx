@@ -4,26 +4,26 @@ import Header from "./Header.tsx";
 
 function Dashboard() {
     const [info] = useState([]);
-    async function signOut(e:MouseEvent) {
+
+    async function signOut(e: MouseEvent) {
 
         e.preventDefault()
 
-        if(window.confirm("Are you sure you want to sign out?")){
-            await auth.signOut().then(function() {
+        if (window.confirm("Are you sure you want to sign out?")) {
+            await auth.signOut().then(function () {
                 console.log("Successfully signed out.")
 
-            }).catch(function(error) {
+            }).catch(function (error) {
                 console.log(error)
                 console.log("An error occurred")
             });
-        }
-
-        else{
+        } else {
             return
         }
 
 
     }
+
     return (<span><Header/>
                 <h1>Welcome {auth.currentUser.displayName}</h1>
                 <img
@@ -56,22 +56,24 @@ function Dashboard() {
     );
 
 }
-function Frame(course: string, name:string , age:string) {
-        console.log(course + " " + name + " " + age);
-        return (
+
+function Frame(course: string, name: string, age: string) {
+    console.log(course + " " + name + " " + age);
+    return (
         <center>
-        <div className="div">
+            <div className="div">
 
-        <p>NAME : {name}</p>
-
-
-    <p>Age : {age}</p>
+                <p>NAME : {name}</p>
 
 
-    <p>Course : {course}</p>
+                <p>Age : {age}</p>
 
-</div>
-</center>
-)
+
+                <p>Course : {course}</p>
+
+            </div>
+        </center>
+    )
 }
+
 export default Dashboard

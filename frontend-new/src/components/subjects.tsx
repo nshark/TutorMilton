@@ -2,8 +2,7 @@ import PropTypes from 'prop-types';
 import './profcomps.css';
 import SubjectList from './subjectList'
 
-function Subjects({ subject, onAddSub, showSub }: { subject: unknown, onAddSub: () => void, showSub: boolean }) {
-
+function Subjects({subject, onAddSub, showSub}: { subject: unknown, onAddSub: () => void, showSub: boolean }) {
 
 
     return (
@@ -11,10 +10,11 @@ function Subjects({ subject, onAddSub, showSub }: { subject: unknown, onAddSub: 
             <header className="prof-comp">
                 <h1 className="top-bar-title">
                     <span className="top-bar-title-tutor">My Subjects</span>
-                    <button className="nav-element nav-button" onClick = {onAddSub}>{showSub ? 'close' : 'Add Subject'} </button>
+                    <button className="nav-element nav-button"
+                            onClick={onAddSub}>{showSub ? 'close' : 'Add Subject'} </button>
                 </h1>
 
-                < SubjectList subjects = {subject} />
+                < SubjectList subjects={subject}/>
 
                 <h1 className="top-bar-title">
                     <span className="top-bar-title-tutor">Pending Subjects</span>

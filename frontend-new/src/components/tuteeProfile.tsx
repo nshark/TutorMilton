@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 
 import Frees from './Frees'
 import Sessions from './Sessions'
 import AddFree from './AddFree'
-import { useState } from 'react'
+import {useState} from 'react'
 
 function TuteeProfile() { //This needs to be "serverified"
 
@@ -11,7 +11,7 @@ function TuteeProfile() { //This needs to be "serverified"
     const [sessions, setSessions] = useState([])
 
 
-    const [showAddFree2, setShowAddFree] = useState (false)
+    const [showAddFree2, setShowAddFree] = useState(false)
 
 
     useEffect(() => {
@@ -35,7 +35,7 @@ function TuteeProfile() { //This needs to be "serverified"
 
     }, [])
 
-    const addFree = async (free:JSON) => {
+    const addFree = async (free: JSON) => {
         const res = await fetch('http://localhost:5000/frees', {
             method: 'POST',
             headers: {
@@ -44,7 +44,7 @@ function TuteeProfile() { //This needs to be "serverified"
             body: JSON.stringify(free)
         })
 
-        const data  = await res.json()
+        const data = await res.json()
 
         setFrees([...frees, data])
     }
@@ -57,13 +57,13 @@ function TuteeProfile() { //This needs to be "serverified"
             <div className="row">
 
                 <div className="column">
-                    <Sessions session = { sessions }/>
+                    <Sessions session={sessions}/>
                 </div>
 
                 <div className="column">
 
                     {showAddFree2 && <AddFree onAddFree={addFree}/>}
-                    <Frees free={frees} onAddFree = {()=>setShowAddFree(!showAddFree2)} showFree={showAddFree2}/>
+                    <Frees free={frees} onAddFree={() => setShowAddFree(!showAddFree2)} showFree={showAddFree2}/>
 
                 </div>
 

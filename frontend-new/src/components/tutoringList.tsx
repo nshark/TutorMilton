@@ -1,5 +1,5 @@
-export default function TutoringList({tutees}){
-    return(
+export default function TutoringList({tutees}) {
+    return (
         <>
             {tutees.map((tut) => ( //This will need to become formatted in the ListComponent format. Mirror what was done for FreeList and SubjectList
                 <div className="inner-container">

@@ -5,7 +5,7 @@ function DormChoice() {
 //Sorry if any of this is mispelled/sorry this looks bad/sorry this is not written well
 //Have fun fixing it!
 
-    return(
+    return (
         <div className="prof-container">
             <header className="prof-comp">
                 <span className="top-bar-title-tutor">Choose Dorm</span>

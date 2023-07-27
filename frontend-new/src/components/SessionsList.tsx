@@ -1,7 +1,7 @@
-function TutoringList({sessions}){
+function TutoringList({sessions}) {
 
 
-    return(
+    return (
         <>
             {sessions.map((ses) => ( //This will need to become formatted in the ListComponent format. Mirror what was done for FreeList and SubjectList
                 <div className="inner-container">

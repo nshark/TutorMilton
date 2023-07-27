@@ -1,5 +1,5 @@
-import { useEffect, useRef, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import {useEffect, useRef, useState} from 'react';
+import {onAuthStateChanged} from 'firebase/auth';
 import 'firebaseui/dist/firebaseui.css';
 import {auth} from "firebaseui";
 
@@ -13,6 +13,7 @@ interface Props {
     // started. This allows access to certain configuration options such as
     // disableAutoSignIn().
     uiCallback?(ui: auth.AuthUI): void;
+
     // The Firebase App auth instance to use.
     firebaseAuth: any; // As firebaseui-web
     className?: string;
@@ -59,7 +60,7 @@ const StyledFirebaseAuth = ({uiConfig, firebaseAuth, className, uiCallback}: Pro
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [uiConfig]);
 
-    return <div className={className} ref={elementRef} />;
+    return <div className={className} ref={elementRef}/>;
 };
 
 export default StyledFirebaseAuth;
