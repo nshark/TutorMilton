@@ -86,7 +86,8 @@ export default function RegisterPage() {
                 email: user.email,
                 subject: user.subject,
                 closed: true,
-                date: Date()
+                date: Date(),
+                tutor: auth.currentUser.displayName
             });
         } catch (e) {
             console.log(e)

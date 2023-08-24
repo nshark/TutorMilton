@@ -12,7 +12,7 @@ import RegisterPage from './components/registerPage.tsx'
 import TutorProfile from './components/tutorProfile.tsx';
 import TuteeProfile from './components/tuteeProfile.tsx'
 import Admin_Dashboard from "./components/Admin_Dashboard.tsx";
-
+import TuteeReview from "./components/tuteeReview.tsx";
 //TODO Track down the types of the various database calls and type them properly
 function App() {
     async function saveUser() {
@@ -50,6 +50,7 @@ function App() {
                             <Route path="/tutorrequests" element={<TutorRequest/>}/>
                             <Route path="/pairing" element={<RegisterPage/>}/>
                             <Route path="/register" element={<PairingPage/>}/>
+                            <Route path="/tuteeReview" element={<TuteeReview/>}/>
                         </Routes>
 
 

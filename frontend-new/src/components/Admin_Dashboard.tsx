@@ -1,70 +1,14 @@
-import {auth, collection, db} from "../config/firebase-config.ts";
-import {MouseEvent, useEffect, useState} from "react";
-import Header from "./Header.tsx";
-
-import {
-    createColumnHelper,
-    flexRender,
-    getCoreRowModel,
-    useReactTable,
-} from '@tanstack/react-table'
-import {getDocs, query} from "firebase/firestore";
-
-type Person = {
-    name: string,
-    comment: string,
-    subjectsToTutor: string
-}
-
-
-const columnHelper = createColumnHelper<Person>();
-
-const columns = [
-    columnHelper.accessor('name', {
-        cell: info => info.getValue(),
-    }),
-    columnHelper.accessor(row => row.comment, {
-        id: 'comment',
-        cell: info => <i>{info.getValue()}</i>,
-        header: () => <span>Comment</span>,
-    }),
-    columnHelper.accessor(row => row.subjectsToTutor, {
-        id: 'subjectsToTutor',
-        cell: info => <i>{info.getValue()}</i>,
-        header: () => <span>Subjects</span>,
-    })
-]
-
+import {auth} from "../config/firebase-config.ts";
+import {JSX, MouseEvent, useState} from "react";
+import Admin_Header from "./Admin_Header.tsx";
+import TutorTable from "./tutorTable.tsx";
+import TuteeTable from "./tuteeTable.tsx";
 function Admin_Dashboard() {
-    const [data, setData] = useState<Person[]>(() => [{
-        name: "test",
-        comment: "if this shows up, email Noah",
-        subjectsToTutor: "N/A"
-    }])
     const [info] = useState([]);
-    const table = useReactTable({
-        data,
-        columns,
-        getCoreRowModel: getCoreRowModel(),
-    })
-    useEffect(() => {
-        async function commentGetter() {
-            const q = query(collection(db, "/tutors"));
-            const querySnapshot = await getDocs(q);
-            const tutors: Person[] = [];
-            querySnapshot.forEach((doc) => {
-                tutors.push({
-                    name: doc.data().displayName,
-                    comment: doc.data().comment,
-                    subjectsToTutor: doc.data().subjectsToTutor
-                })
-            });
-            setData(tutors);
-        }
-
-        commentGetter();
-    }, [])
-
+    const [menus] = useState(new Map<string, JSX.Element>());
+    menus.set("tutors", TutorTable());
+    menus.set("tutee", TuteeTable());
+    const [selectedMenu, setSelectedMenu] = useState("tutors")
     async function signOut(e: MouseEvent) {
 
         e.preventDefault()
@@ -84,7 +28,7 @@ function Admin_Dashboard() {
 
     }
 
-    return (<span><Header/>
+    return (<span><div><Admin_Header/></div>
                 <h1>Welcome Admin {auth.currentUser.displayName}</h1>
                 <img
                     alt="profile picture"
@@ -93,59 +37,15 @@ function Admin_Dashboard() {
                 />
                 <br/>
                 <div className="signout-Div">
-                <button className="conf-button" onClick={signOut}>Sign Out!</button>
+                    <button className="conf-button" onClick={signOut}>Sign Out!</button>
+                    <select className="dropbtn" onChange={(e) => {setSelectedMenu(e.target.value)}}>
+                        <option value="tutors">Tutor Data</option>
+                        <option value="tutee">All tutee requests</option>
+                    </select>
                 </div>
                 <div className="dashboard">
 
-       <div className="dashboard__container">
-<table>
-        <thead>
-          {table.getHeaderGroups().map(headerGroup => (
-              <tr key={headerGroup.id}>
-                  {headerGroup.headers.map(header => (
-                      <th key={header.id}>
-                          {header.isPlaceholder
-                              ? null
-                              : flexRender(
-                                  header.column.columnDef.header,
-                                  header.getContext()
-                              )}
-                      </th>
-                  ))}
-              </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map(row => (
-              <tr key={row.id}>
-                  {row.getVisibleCells().map(cell => (
-                      <td key={cell.id}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                  ))}
-              </tr>
-          ))}
-        </tbody>
-        <tfoot>
-          {table.getFooterGroups().map(footerGroup => (
-              <tr key={footerGroup.id}>
-                  {footerGroup.headers.map(header => (
-                      <th key={header.id}>
-                          {header.isPlaceholder
-                              ? null
-                              : flexRender(
-                                  header.column.columnDef.footer,
-                                  header.getContext()
-                              )}
-                      </th>
-                  ))}
-              </tr>
-          ))}
-        </tfoot>
-      </table> <div><button className={"conf-button"} onClick={() => {/*Should bring up a file upload dialogue for a csv, and then parse the csv
-      and save it to the database in a course list form.*/
-
-       }}>Update Course List</button></div>    <div className="App">
+       <div className="dashboard__container">{menus.get(selectedMenu)}<div className="App">
 
          {
              info.map((data) => {

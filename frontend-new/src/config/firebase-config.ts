@@ -1,6 +1,7 @@
 import { getAuth, GoogleAuthProvider, signInWithPopup} from "firebase/auth";
 import { initializeApp } from "firebase/app"
 import { getFirestore, collection, query, where, getDocs, addDoc} from "firebase/firestore"
+import { getStorage } from "firebase/storage";
 const firebaseConfig = {
     apiKey: "AIzaSyAPHfLRVwiyFCPaJdcOabfNKF5J23L-2Hc",
     authDomain: "milton-tutor.firebaseapp.com",
@@ -13,6 +14,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage(app);
 let user = null;
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async () => {
@@ -43,6 +45,7 @@ export {
     auth,
     user,
     db,
+    storage,
     signInWithGoogle,
     logout,
     collection

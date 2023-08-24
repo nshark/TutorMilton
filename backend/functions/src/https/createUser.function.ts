@@ -21,7 +21,7 @@ export default https.onCall(async (data) => {
   let uid;
   try {
     uid = await createUserAuth(email, isAdmin);
-  } catch (error) {
+  } catch (error:any) {
     throw new https.HttpsError('invalid-argument', error.code);
   }
 
