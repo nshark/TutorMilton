@@ -1,17 +1,15 @@
-import './Header.css'
+import "./Header.css";
 
 function AvailabilitySwitch() {
-
-
-    return (
-        <div className="prof-container">
-            <header className="prof-comp">
-                <span className="top-bar-title-tutor">I'm Available<input type="checkbox"></input></span>
-
-            </header>
-
-        </div>
-    )
+  return (
+    <div className="prof-container">
+      <header className="prof-comp">
+        <span className="top-bar-title-tutor">
+          I'm Available<input type="checkbox"></input>
+        </span>
+      </header>
+    </div>
+  );
 }
 
-export default AvailabilitySwitch
+export default AvailabilitySwitch;

@@ -1,34 +1,27 @@
-import PropTypes from 'prop-types';
-import './profcomps.css';
-import TutoringList from './tutoringList'
+import PropTypes from "prop-types";
+import "./profcomps.css";
+import TutoringList from "./tutoringList";
 
-function Tutoring({tutee}) {
-    return (
+function Tutoring({ tutee }) {
+  return (
+    <div className="prof-container">
+      <header className="prof-comp">
+        <h1 className="top-bar-title">
+          <span className="top-bar-title-tutor">Currently Tutoring</span>
+        </h1>
 
-        <div className="prof-container">
-
-            <header className="prof-comp">
-                <h1 className="top-bar-title">
-                    <span className="top-bar-title-tutor">Currently Tutoring</span>
-                </h1>
-
-                <TutoringList tutees={tutee}/>
-
-            </header>
-
-
-        </div>
-
-    )
+        <TutoringList tutees={tutee} />
+      </header>
+    </div>
+  );
 }
-
 
 Tutoring.defaultProps = {
-    tutee: "John Doe, SP2",
-}
+  tutee: "John Doe, SP2",
+};
 
 Tutoring.propTypes = {
-    username: PropTypes.string,
-    loggedIn: PropTypes.bool,
-}
+  username: PropTypes.string,
+  loggedIn: PropTypes.bool,
+};
 export default Tutoring;
