@@ -21,7 +21,7 @@ function DormChoice() {
                     <a href="#">Forbes</a>
                     <a href="#">Wolcott</a>
                     <a href="#">Goodwin</a>
-                    <a href="#">Robins</a>
+                    <a href="#">Robbins</a>
                     <a href="#">Hathaway</a>
                 </div>
             </div>
